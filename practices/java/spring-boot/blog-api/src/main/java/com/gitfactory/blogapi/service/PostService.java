@@ -43,7 +43,6 @@ public class PostService {
      */
     @Transactional
     public PostResponse createPost(PostRequest request) {
-        // ✨ request.toEntity() 사용
         Post post = request.toEntity();
         Post savedPost = postRepository.save(post);
         return PostResponse.from(savedPost);
@@ -57,14 +56,15 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
 
-        // ✨ record 접근자 사용: title(), content(), author()
         post.update(
                 request.title(),
                 request.content(),
                 request.author()
         );
 
-        return PostResponse.from(post);
+        // ✅ save() 호출 추가!
+        Post updatedPost = postRepository.save(post);
+        return PostResponse.from(updatedPost);
     }
 
     /**
@@ -72,17 +72,16 @@ public class PostService {
      */
     @Transactional
     public void deletePost(Long id) {
-        if (!postRepository.existsById(id)) {
-            throw new RuntimeException("Post not found with id: " + id);
-        }
-        postRepository.deleteById(id);
+        // ✅ findById()로 변경 (테스트와 일치)
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+        postRepository.delete(post);
     }
 
     /**
      * 제목으로 게시글 검색
      */
     public List<PostResponse> searchByTitle(String keyword) {
-        // ✨ findByTitleContaining 사용 (IgnoreCase 제거)
         return postRepository.findByTitleContaining(keyword).stream()
                 .map(PostResponse::from)
                 .toList();

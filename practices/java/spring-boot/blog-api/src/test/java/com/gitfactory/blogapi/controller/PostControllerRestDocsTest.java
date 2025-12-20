@@ -43,7 +43,7 @@ class PostControllerRestDocsTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean  // Spring Boot 3.3.5에서는 MockBean 사용
+    @MockBean
     private PostService postService;
 
     @Autowired
