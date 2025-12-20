@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'  // ✨ REST Docs용 추가
+    id 'jacoco'  // ⭐ JaCoCo 플러그인
 }
 
 group = 'com.gitfactory'
@@ -54,10 +55,49 @@ dependencies {
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
+// ✨ JaCoCo 설정
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+// ✨ JaCoCo 테스트 리포트 설정
+jacocoTestReport {
+    dependsOn test  // 테스트 실행 후 리포트 생성
+
+    reports {
+        xml.required = true   // XML 리포트 생성 (CI/CD용)
+        html.required = true  // HTML 리포트 생성 (사람이 보기 좋음)
+        csv.required = false  // CSV 리포트 비활성화
+    }
+
+    // 리포트에서 제외할 클래스 패턴 (선택사항)
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/BlogApiApplication.class',     // Main 클래스 제외
+                    '**/config/**',                     // Config 클래스 제외 (선택)
+                    '**/dto/**',                        // DTO 제외 (선택)
+            ])
+        }))
+    }
+}
+
+// ✨ JaCoCo 커버리지 검증 (선택사항)
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80  // 80% 커버리지 목표
+            }
+        }
+    }
+}
+
 // ✨ Test 태스크 설정 (snippets 출력)
 tasks.named('test') {
     outputs.dir snippetsDir
     useJUnitPlatform()
+    finalizedBy jacocoTestReport  // 테스트 후 자동으로 리포트 생성
 }
 
 // ✨ AsciiDoctor 태스크 설정

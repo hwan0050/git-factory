@@ -10,12 +10,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +45,7 @@ class PostControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockitoBean
+    @MockBean
     private PostService postService;
 
     private PostResponse postResponse;
@@ -52,17 +53,21 @@ class PostControllerTest {
 
     @BeforeEach
     void setUp() {
-        postRequest = PostRequest.builder()
-                .title("테스트 제목")
-                .content("테스트 내용")
-                .author("테스트 작성자")
-                .build();
+        // Record 타입이므로 생성자 사용
+        postRequest = new PostRequest(
+                "테스트 제목",
+                "테스트 내용",
+                "테스트 작성자"
+        );
 
-        postResponse = PostResponse.builder()
-                .title("테스트 제목")
-                .content("테스트 내용")
-                .author("테스트 작성자")
-                .build();
+        postResponse = new PostResponse(
+                1L,
+                "테스트 제목",
+                "테스트 내용",
+                "테스트 작성자",
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
     }
 
     @Test
@@ -103,7 +108,7 @@ class PostControllerTest {
         // When & Then
         mockMvc.perform(get("/api/posts/{id}", 999L))
                 .andExpect(status().isNotFound())
-                .andExpect(content().string("Post not found with id: 999"));  // ✅ 메시지도 확인
+                .andExpect(content().string("Post not found with id: 999"));
     }
 
     @Test
@@ -124,18 +129,21 @@ class PostControllerTest {
     @Test
     @DisplayName("PUT /api/posts/{id} - 포스트 수정 성공")
     void updatePost() throws Exception {
-        // Given
-        PostRequest updateRequest = PostRequest.builder()
-                .title("수정된 제목")
-                .content("수정된 내용")
-                .author("테스트 작성자")
-                .build();
+        // Given - Record 타입 생성자 사용
+        PostRequest updateRequest = new PostRequest(
+                "수정된 제목",
+                "수정된 내용",
+                "테스트 작성자"
+        );
 
-        PostResponse updateResponse = PostResponse.builder()
-                .title("수정된 제목")
-                .content("수정된 내용")
-                .author("테스트 작성자")
-                .build();
+        PostResponse updateResponse = new PostResponse(
+                1L,
+                "수정된 제목",
+                "수정된 내용",
+                "테스트 작성자",
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
 
         given(postService.updatePost(eq(1L), any(PostRequest.class)))
                 .willReturn(updateResponse);
@@ -167,9 +175,9 @@ class PostControllerTest {
         List<PostResponse> posts = Arrays.asList(postResponse);
         given(postService.searchByTitle("테스트")).willReturn(posts);
 
-        // When & Then - ✅ keyword 파라미터로 변경!
+        // When & Then
         mockMvc.perform(get("/api/posts/search")
-                        .param("keyword", "테스트"))  // title → keyword
+                        .param("keyword", "테스트"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].title", is("테스트 제목")));
