@@ -1,7 +1,9 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.12'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'  // ✨ REST Docs용 추가
+    id 'jacoco'  // ⭐ JaCoCo 플러그인
 }
 
 group = 'com.gitfactory'
@@ -9,35 +11,119 @@ version = '0.0.1-SNAPSHOT'
 description = 'Blog REST API with Spring Boot'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    asciidoctorExt  // ✨ REST Docs용 추가
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+// ✨ REST Docs snippets 디렉토리 설정
+ext {
+    snippetsDir = file('build/generated-snippets')
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // ✨ Swagger/OpenAPI dependencies
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core:3.24.2'
     testImplementation 'org.hamcrest:hamcrest:2.2'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Spring REST Docs dependencies
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+// ✨ JaCoCo 설정
+jacoco {
+    toolVersion = "0.8.11"
 }
+
+// ✨ JaCoCo 테스트 리포트 설정
+jacocoTestReport {
+    dependsOn test  // 테스트 실행 후 리포트 생성
+
+    reports {
+        xml.required = true   // XML 리포트 생성 (CI/CD용)
+        html.required = true  // HTML 리포트 생성 (사람이 보기 좋음)
+        csv.required = false  // CSV 리포트 비활성화
+    }
+
+    // 리포트에서 제외할 클래스 패턴 (선택사항)
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/BlogApiApplication.class',     // Main 클래스 제외
+                    '**/config/**',                     // Config 클래스 제외 (선택)
+                    '**/dto/**',                        // DTO 제외 (선택)
+            ])
+        }))
+    }
+}
+
+// ✨ JaCoCo 커버리지 검증 (선택사항)
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80  // 80% 커버리지 목표
+            }
+        }
+    }
+}
+
+// ✨ Test 태스크 설정 (snippets 출력)
+tasks.named('test') {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport  // 테스트 후 자동으로 리포트 생성
+}
+
+// ✨ AsciiDoctor 태스크 설정
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
+    dependsOn test
+
+    // 소스 및 출력 디렉토리 설정
+    sourceDir = file('src/docs/asciidoc')
+    outputDir = file('build/docs/asciidoc')
+}
+
+// ✨ bootJar 태스크 설정 (문서를 JAR에 포함)
+bootJar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
+}
+
+// ✨ snippets 디렉토리 생성 태스크
+tasks.register('createSnippetsDir') {
+    doLast {
+        snippetsDir.mkdirs()
+    }
+}
+
+test.dependsOn createSnippetsDir

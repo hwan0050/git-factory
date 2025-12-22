@@ -1,35 +1,46 @@
 package com.gitfactory.blogapi.dto;
 
 import com.gitfactory.blogapi.entity.Post;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class PostResponse {
+/**
+ * 게시글 응답 DTO
+ */
+@Schema(description = "게시글 응답")
+public record PostResponse(
+        @Schema(description = "게시글 ID", example = "1")
+        Long id,
 
-    private Long id;
-    private String title;
-    private String content;
-    private String author;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+        @Schema(description = "게시글 제목", example = "Spring Boot 학습하기")
+        String title,
 
-    // Entity → DTO 변환
+        @Schema(description = "게시글 내용", example = "Spring Boot는 Java 기반의 웹 프레임워크입니다.")
+        String content,
+
+        @Schema(description = "작성자", example = "홍길동")
+        String author,
+
+        @Schema(description = "생성일시", example = "2025-12-06T10:00:00")
+        LocalDateTime createdAt,
+
+        @Schema(description = "수정일시", example = "2025-12-06T15:30:00")
+        LocalDateTime updatedAt
+) {
+    /**
+     * Post Entity를 PostResponse DTO로 변환
+     *
+     * @param post Post Entity
+     * @return PostResponse DTO
+     */
     public static PostResponse from(Post post) {
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .author(post.getAuthor())
-                .createdAt(post.getCreatedAt())
-                .updatedAt(post.getUpdatedAt())
-                .build();
+        return new PostResponse(
+                post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getAuthor(),
+                post.getCreatedAt(),
+                post.getUpdatedAt()
+        );
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+/**
+ * 게시글 엔티티
+ */
 @Entity
 @Table(name = "posts")
 @Getter
@@ -46,9 +49,16 @@ public class Post {
         this.author = author;
     }
 
-    // 포스트 수정 메서드 ⭐
-    public void update(String title, String content) {
+    /**
+     * 게시글 수정
+     *
+     * @param title 수정할 제목
+     * @param content 수정할 내용
+     * @param author 수정할 작성자
+     */
+    public void update(String title, String content, String author) {
         this.title = title;
         this.content = content;
+        this.author = author;
     }
 }

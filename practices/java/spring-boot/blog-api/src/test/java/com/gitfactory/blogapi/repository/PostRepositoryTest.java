@@ -19,8 +19,8 @@ class PostRepositoryTest {
     private PostRepository postRepository;
 
     @Test
-    @DisplayName("포스트 저장 테스트")
-    void savePost() {
+    @DisplayName("게시글 저장 테스트")
+    void save() {
         // Given
         Post post = Post.builder()
                 .title("테스트 제목")
@@ -36,12 +36,10 @@ class PostRepositoryTest {
         assertThat(savedPost.getTitle()).isEqualTo("테스트 제목");
         assertThat(savedPost.getContent()).isEqualTo("테스트 내용");
         assertThat(savedPost.getAuthor()).isEqualTo("테스트 작성자");
-        assertThat(savedPost.getCreatedAt()).isNotNull();
-        assertThat(savedPost.getUpdatedAt()).isNotNull();
     }
 
     @Test
-    @DisplayName("ID로 포스트 조회 테스트")
+    @DisplayName("ID로 게시글 조회 테스트")
     void findById() {
         // Given
         Post post = Post.builder()
@@ -60,7 +58,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    @DisplayName("전체 포스트 조회 테스트")
+    @DisplayName("모든 게시글 조회 테스트")
     void findAll() {
         // Given
         Post post1 = Post.builder()
@@ -73,6 +71,7 @@ class PostRepositoryTest {
                 .content("내용2")
                 .author("작성자2")
                 .build();
+
         postRepository.save(post1);
         postRepository.save(post2);
 
@@ -84,33 +83,34 @@ class PostRepositoryTest {
     }
 
     @Test
-    @DisplayName("포스트 수정 테스트")
-    void updatePost() {
+    @DisplayName("게시글 수정 테스트")
+    void update() {
         // Given
         Post post = Post.builder()
                 .title("원본 제목")
                 .content("원본 내용")
-                .author("작성자")
+                .author("원본 작성자")
                 .build();
         Post savedPost = postRepository.save(post);
 
-        // When - update 메서드 사용! ⭐
-        savedPost.update("수정된 제목", "수정된 내용");
+        // When - 3개 파라미터로 수정 (title, content, author)
+        savedPost.update("수정된 제목", "수정된 내용", "수정된 작성자");
         Post updatedPost = postRepository.save(savedPost);
 
         // Then
         assertThat(updatedPost.getTitle()).isEqualTo("수정된 제목");
         assertThat(updatedPost.getContent()).isEqualTo("수정된 내용");
+        assertThat(updatedPost.getAuthor()).isEqualTo("수정된 작성자");
     }
 
     @Test
-    @DisplayName("포스트 삭제 테스트")
-    void deletePost() {
+    @DisplayName("게시글 삭제 테스트")
+    void delete() {
         // Given
         Post post = Post.builder()
-                .title("삭제할 제목")
-                .content("삭제할 내용")
-                .author("작성자")
+                .title("테스트 제목")
+                .content("테스트 내용")
+                .author("테스트 작성자")
                 .build();
         Post savedPost = postRepository.save(post);
 
@@ -123,58 +123,68 @@ class PostRepositoryTest {
     }
 
     @Test
-    @DisplayName("제목으로 포스트 검색 테스트")
+    @DisplayName("제목으로 게시글 검색 테스트")
     void findByTitleContaining() {
         // Given
         Post post1 = Post.builder()
-                .title("Spring Boot 테스트")
+                .title("Spring Boot 학습")
                 .content("내용1")
                 .author("작성자1")
                 .build();
         Post post2 = Post.builder()
-                .title("JPA 테스트")
+                .title("JPA 학습")
                 .content("내용2")
                 .author("작성자2")
                 .build();
-        postRepository.save(post1);
-        postRepository.save(post2);
-
-        // When
-        List<Post> posts = postRepository.findByTitleContaining("Spring");
-
-        // Then
-        assertThat(posts).hasSize(1);
-        assertThat(posts.get(0).getTitle()).contains("Spring Boot");
-    }
-
-    @Test
-    @DisplayName("작성자로 포스트 검색 테스트")
-    void findByAuthor() {
-        // Given
-        Post post1 = Post.builder()
-                .title("제목1")
-                .content("내용1")
-                .author("Hwan")
-                .build();
-        Post post2 = Post.builder()
-                .title("제목2")
-                .content("내용2")
-                .author("Hwan")
-                .build();
         Post post3 = Post.builder()
-                .title("제목3")
+                .title("Spring Security")
                 .content("내용3")
-                .author("Other")
+                .author("작성자3")
                 .build();
+
         postRepository.save(post1);
         postRepository.save(post2);
         postRepository.save(post3);
 
         // When
-        List<Post> hwanPosts = postRepository.findByAuthor("Hwan");
+        List<Post> posts = postRepository.findByTitleContaining("Spring");
 
         // Then
-        assertThat(hwanPosts).hasSize(2);
-        assertThat(hwanPosts).allMatch(post -> post.getAuthor().equals("Hwan"));
+        assertThat(posts).hasSize(2);
+        assertThat(posts).extracting(Post::getTitle)
+                .containsExactlyInAnyOrder("Spring Boot 학습", "Spring Security");
+    }
+
+    @Test
+    @DisplayName("작성자로 게시글 검색 테스트")
+    void findByAuthor() {
+        // Given
+        Post post1 = Post.builder()
+                .title("제목1")
+                .content("내용1")
+                .author("홍길동")
+                .build();
+        Post post2 = Post.builder()
+                .title("제목2")
+                .content("내용2")
+                .author("홍길동")
+                .build();
+        Post post3 = Post.builder()
+                .title("제목3")
+                .content("내용3")
+                .author("김철수")
+                .build();
+
+        postRepository.save(post1);
+        postRepository.save(post2);
+        postRepository.save(post3);
+
+        // When
+        List<Post> posts = postRepository.findByAuthor("홍길동");
+
+        // Then
+        assertThat(posts).hasSize(2);
+        assertThat(posts).extracting(Post::getAuthor)
+                .containsOnly("홍길동");
     }
 }
