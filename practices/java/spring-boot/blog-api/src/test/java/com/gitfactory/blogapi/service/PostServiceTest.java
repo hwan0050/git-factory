@@ -3,7 +3,11 @@ package com.gitfactory.blogapi.service;
 import com.gitfactory.blogapi.dto.PostRequest;
 import com.gitfactory.blogapi.dto.PostResponse;
 import com.gitfactory.blogapi.entity.Post;
+import com.gitfactory.blogapi.entity.User;
+import com.gitfactory.blogapi.entity.UserRole;
+import com.gitfactory.blogapi.exception.ResourceNotFoundException;
 import com.gitfactory.blogapi.repository.PostRepository;
+import com.gitfactory.blogapi.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -32,26 +35,38 @@ class PostServiceTest {
     @Mock
     private PostRepository postRepository;
 
+    @Mock
+    private UserRepository userRepository;  // ✨ 추가
+
     @InjectMocks
     private PostService postService;
 
+    private User user;  // ✨ 추가
     private Post post;
     private PostRequest postRequest;
 
     @BeforeEach
     void setUp() {
-        // Record 타입이므로 생성자 사용
+        // ✨ User 생성
+        user = User.builder()
+                .username("testuser")
+                .email("test@example.com")
+                .password("password123")
+                .role(UserRole.USER)
+                .build();
+
+        // ✨ userId로 변경
         postRequest = new PostRequest(
                 "테스트 제목",
                 "테스트 내용",
-                "테스트 작성자"
+                1L  // userId
         );
 
-        // Post Entity는 id 제외하고 생성
+        // ✨ Post는 User와 함께 생성
         post = Post.builder()
                 .title("테스트 제목")
                 .content("테스트 내용")
-                .author("테스트 작성자")
+                .author(user)  // User 객체
                 .build();
     }
 
@@ -59,6 +74,7 @@ class PostServiceTest {
     @DisplayName("게시글 생성 테스트")
     void createPost() {
         // Given
+        given(userRepository.findById(1L)).willReturn(Optional.of(user));
         given(postRepository.save(any(Post.class))).willReturn(post);
 
         // When
@@ -68,7 +84,21 @@ class PostServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.title()).isEqualTo("테스트 제목");
         assertThat(result.content()).isEqualTo("테스트 내용");
+        assertThat(result.authorName()).isEqualTo("testuser");
+        verify(userRepository, times(1)).findById(1L);
         verify(postRepository, times(1)).save(any(Post.class));
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 사용자로 게시글 생성 실패")
+    void createPost_UserNotFound() {
+        // Given
+        given(userRepository.findById(1L)).willReturn(Optional.empty());
+
+        // When & Then
+        assertThatThrownBy(() -> postService.createPost(postRequest))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("User not found with id: 1");
     }
 
     @Test
@@ -110,7 +140,7 @@ class PostServiceTest {
 
         // When & Then
         assertThatThrownBy(() -> postService.getPostById(999L))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Post not found with id: 999");
     }
 
@@ -121,17 +151,11 @@ class PostServiceTest {
         PostRequest updateRequest = new PostRequest(
                 "수정된 제목",
                 "수정된 내용",
-                "수정된 작성자"
+                1L  // userId (수정 시에는 사용 안 함)
         );
 
-        Post updatedPost = Post.builder()
-                .title("수정된 제목")
-                .content("수정된 내용")
-                .author("수정된 작성자")
-                .build();
-
         given(postRepository.findById(anyLong())).willReturn(Optional.of(post));
-        given(postRepository.save(any(Post.class))).willReturn(updatedPost);
+        given(postRepository.save(any(Post.class))).willReturn(post);
 
         // When
         PostResponse result = postService.updatePost(1L, updateRequest);
@@ -179,15 +203,15 @@ class PostServiceTest {
     void getPostsByAuthor() {
         // Given
         List<Post> posts = Arrays.asList(post);
-        given(postRepository.findByAuthor("테스트 작성자")).willReturn(posts);
+        given(postRepository.findByAuthor_UsernameContaining("testuser")).willReturn(posts);
 
         // When
-        List<PostResponse> result = postService.getPostsByAuthor("테스트 작성자");
+        List<PostResponse> result = postService.getPostsByAuthor("testuser");
 
         // Then
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).author()).isEqualTo("테스트 작성자");
-        verify(postRepository, times(1)).findByAuthor("테스트 작성자");
+        assertThat(result.get(0).authorName()).isEqualTo("testuser");
+        verify(postRepository, times(1)).findByAuthor_UsernameContaining("testuser");
     }
 
     @Test
@@ -197,13 +221,13 @@ class PostServiceTest {
         PostRequest updateRequest = new PostRequest(
                 "수정된 제목",
                 "수정된 내용",
-                "수정된 작성자"
+                1L
         );
         given(postRepository.findById(anyLong())).willReturn(Optional.empty());
 
         // When & Then
         assertThatThrownBy(() -> postService.updatePost(999L, updateRequest))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Post not found with id: 999");
     }
 
@@ -215,7 +239,7 @@ class PostServiceTest {
 
         // When & Then
         assertThatThrownBy(() -> postService.deletePost(999L))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Post not found with id: 999");
     }
 }

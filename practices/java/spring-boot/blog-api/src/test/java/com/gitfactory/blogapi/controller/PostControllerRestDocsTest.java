@@ -52,12 +52,13 @@ class PostControllerRestDocsTest {
     private PostResponse sampleResponse;
 
     @BeforeEach
-    void setUp() {
+    void setup() {
         sampleResponse = new PostResponse(
                 1L,
                 "테스트 제목",
                 "테스트 내용",
                 "테스트 작성자",
+                1L,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -80,7 +81,8 @@ class PostControllerRestDocsTest {
                                 fieldWithPath("[].id").description("게시글 ID"),
                                 fieldWithPath("[].title").description("게시글 제목"),
                                 fieldWithPath("[].content").description("게시글 내용"),
-                                fieldWithPath("[].author").description("작성자"),
+                                fieldWithPath("[].authorName").description("작성자 이름"),
+                                fieldWithPath("[].authorId").description("작성자 ID"),
                                 fieldWithPath("[].createdAt").description("생성일시"),
                                 fieldWithPath("[].updatedAt").description("수정일시")
                         )
@@ -106,7 +108,8 @@ class PostControllerRestDocsTest {
                                 fieldWithPath("id").description("게시글 ID"),
                                 fieldWithPath("title").description("게시글 제목"),
                                 fieldWithPath("content").description("게시글 내용"),
-                                fieldWithPath("author").description("작성자"),
+                                fieldWithPath("authorName").description("작성자 이름"),
+                                fieldWithPath("authorId").description("작성자 ID"),
                                 fieldWithPath("createdAt").description("생성일시"),
                                 fieldWithPath("updatedAt").description("수정일시")
                         )
@@ -116,7 +119,7 @@ class PostControllerRestDocsTest {
     @Test
     void 게시글_생성_API_문서화() throws Exception {
         // Given
-        PostRequest request = new PostRequest("새 게시글", "새 내용", "작성자");
+        PostRequest request = new PostRequest("새 게시글", "새 내용", 1L);
         given(postService.createPost(any(PostRequest.class))).willReturn(sampleResponse);
 
         // When & Then
@@ -130,13 +133,14 @@ class PostControllerRestDocsTest {
                         requestFields(
                                 fieldWithPath("title").description("게시글 제목"),
                                 fieldWithPath("content").description("게시글 내용"),
-                                fieldWithPath("author").description("작성자")
+                                fieldWithPath("userId").description("작성자 ID")
                         ),
                         responseFields(
                                 fieldWithPath("id").description("게시글 ID"),
                                 fieldWithPath("title").description("게시글 제목"),
                                 fieldWithPath("content").description("게시글 내용"),
-                                fieldWithPath("author").description("작성자"),
+                                fieldWithPath("authorName").description("작성자 이름"),
+                                fieldWithPath("authorId").description("작성자 ID"),
                                 fieldWithPath("createdAt").description("생성일시"),
                                 fieldWithPath("updatedAt").description("수정일시")
                         )
@@ -146,12 +150,13 @@ class PostControllerRestDocsTest {
     @Test
     void 게시글_수정_API_문서화() throws Exception {
         // Given
-        PostRequest request = new PostRequest("수정된 제목", "수정된 내용", "수정자");
+        PostRequest request = new PostRequest("수정된 제목", "수정된 내용", 1L);
         PostResponse updatedResponse = new PostResponse(
                 1L,
                 "수정된 제목",
                 "수정된 내용",
-                "수정자",
+                "테스트 작성자",
+                1L,
                 sampleResponse.createdAt(),
                 LocalDateTime.now()
         );
@@ -171,13 +176,14 @@ class PostControllerRestDocsTest {
                         requestFields(
                                 fieldWithPath("title").description("수정할 제목"),
                                 fieldWithPath("content").description("수정할 내용"),
-                                fieldWithPath("author").description("수정자")
+                                fieldWithPath("userId").description("사용자 ID (수정 시 무시됨)")
                         ),
                         responseFields(
                                 fieldWithPath("id").description("게시글 ID"),
                                 fieldWithPath("title").description("수정된 제목"),
                                 fieldWithPath("content").description("수정된 내용"),
-                                fieldWithPath("author").description("수정자"),
+                                fieldWithPath("authorName").description("작성자 이름"),
+                                fieldWithPath("authorId").description("작성자 ID"),
                                 fieldWithPath("createdAt").description("생성일시"),
                                 fieldWithPath("updatedAt").description("수정일시")
                         )
@@ -219,7 +225,8 @@ class PostControllerRestDocsTest {
                                 fieldWithPath("[].id").description("게시글 ID"),
                                 fieldWithPath("[].title").description("게시글 제목"),
                                 fieldWithPath("[].content").description("게시글 내용"),
-                                fieldWithPath("[].author").description("작성자"),
+                                fieldWithPath("[].authorName").description("작성자 이름"),
+                                fieldWithPath("[].authorId").description("작성자 ID"),
                                 fieldWithPath("[].createdAt").description("생성일시"),
                                 fieldWithPath("[].updatedAt").description("수정일시")
                         )
@@ -233,20 +240,22 @@ class PostControllerRestDocsTest {
         given(postService.getPostsByAuthor(any(String.class))).willReturn(posts);
 
         // When & Then
-        mockMvc.perform(get("/api/posts/author/{author}", "테스트작성자")
+        mockMvc.perform(get("/api/posts/search/author")
+                        .param("keyword", "테스트작성자")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("posts-search-by-author",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
-                        pathParameters(
-                                parameterWithName("author").description("검색할 작성자명")
+                        queryParameters(
+                                parameterWithName("keyword").description("검색할 작성자명")
                         ),
                         responseFields(
                                 fieldWithPath("[].id").description("게시글 ID"),
                                 fieldWithPath("[].title").description("게시글 제목"),
                                 fieldWithPath("[].content").description("게시글 내용"),
-                                fieldWithPath("[].author").description("작성자"),
+                                fieldWithPath("[].authorName").description("작성자 이름"),
+                                fieldWithPath("[].authorId").description("작성자 ID"),
                                 fieldWithPath("[].createdAt").description("생성일시"),
                                 fieldWithPath("[].updatedAt").description("수정일시")
                         )
