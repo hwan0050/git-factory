@@ -3,7 +3,10 @@ package com.gitfactory.blogapi.service;
 import com.gitfactory.blogapi.dto.PostRequest;
 import com.gitfactory.blogapi.dto.PostResponse;
 import com.gitfactory.blogapi.entity.Post;
+import com.gitfactory.blogapi.entity.User;
+import com.gitfactory.blogapi.exception.ResourceNotFoundException;
 import com.gitfactory.blogapi.repository.PostRepository;
+import com.gitfactory.blogapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;  // ✨ 추가
 
     /**
      * 모든 게시글 조회
@@ -34,7 +38,7 @@ public class PostService {
      */
     public PostResponse getPostById(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id: " + id));
         return PostResponse.from(post);
     }
 
@@ -43,7 +47,12 @@ public class PostService {
      */
     @Transactional
     public PostResponse createPost(PostRequest request) {
-        Post post = request.toEntity();
+        // ✨ User 조회
+        User author = userRepository.findById(request.userId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + request.userId()));
+
+        // ✨ Post 생성 시 User 전달
+        Post post = request.toEntity(author);
         Post savedPost = postRepository.save(post);
         return PostResponse.from(savedPost);
     }
@@ -54,15 +63,11 @@ public class PostService {
     @Transactional
     public PostResponse updatePost(Long id, PostRequest request) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id: " + id));
 
-        post.update(
-                request.title(),
-                request.content(),
-                request.author()
-        );
+        // ✨ update 메서드는 title, content만 수정 (작성자는 변경 불가)
+        post.update(request.title(), request.content());
 
-        // ✅ save() 호출 추가!
         Post updatedPost = postRepository.save(post);
         return PostResponse.from(updatedPost);
     }
@@ -72,9 +77,8 @@ public class PostService {
      */
     @Transactional
     public void deletePost(Long id) {
-        // ✅ findById()로 변경 (테스트와 일치)
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id: " + id));
         postRepository.delete(post);
     }
 
@@ -88,10 +92,11 @@ public class PostService {
     }
 
     /**
-     * 작성자로 게시글 검색
+     * 작성자 이름으로 게시글 검색
      */
-    public List<PostResponse> getPostsByAuthor(String author) {
-        return postRepository.findByAuthor(author).stream()
+    public List<PostResponse> getPostsByAuthor(String keyword) {
+        // ✨ 연관 관계 쿼리 메서드 사용
+        return postRepository.findByAuthor_UsernameContaining(keyword).stream()
                 .map(PostResponse::from)
                 .toList();
     }

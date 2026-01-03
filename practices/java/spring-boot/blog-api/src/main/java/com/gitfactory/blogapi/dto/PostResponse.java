@@ -2,6 +2,7 @@ package com.gitfactory.blogapi.dto;
 
 import com.gitfactory.blogapi.entity.Post;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 
 /**
@@ -18,13 +19,16 @@ public record PostResponse(
         @Schema(description = "게시글 내용", example = "Spring Boot는 Java 기반의 웹 프레임워크입니다.")
         String content,
 
-        @Schema(description = "작성자", example = "홍길동")
-        String author,
+        @Schema(description = "작성자 이름", example = "홍길동")
+        String authorName,  // ✨ author → authorName
 
-        @Schema(description = "생성일시", example = "2025-12-06T10:00:00")
+        @Schema(description = "작성자 ID", example = "1")
+        Long authorId,  // ✨ 추가
+
+        @Schema(description = "생성일시", example = "2024-01-01T00:00:00")
         LocalDateTime createdAt,
 
-        @Schema(description = "수정일시", example = "2025-12-06T15:30:00")
+        @Schema(description = "수정일시", example = "2024-01-01T00:00:00")
         LocalDateTime updatedAt
 ) {
     /**
@@ -38,7 +42,8 @@ public record PostResponse(
                 post.getId(),
                 post.getTitle(),
                 post.getContent(),
-                post.getAuthor(),
+                post.getAuthorName(),      // ✨ 작성자 이름
+                post.getAuthor().getId(),  // ✨ 작성자 ID
                 post.getCreatedAt(),
                 post.getUpdatedAt()
         );

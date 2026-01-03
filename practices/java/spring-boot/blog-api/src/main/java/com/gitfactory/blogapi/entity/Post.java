@@ -11,9 +11,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-/**
- * 게시글 엔티티
- */
 @Entity
 @Table(name = "posts")
 @Getter
@@ -31,8 +28,10 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable = false, length = 50)
-    private String author;
+    // ✨ 기존 author 필드 제거하고 User 연관 관계로 변경
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -43,22 +42,20 @@ public class Post {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Post(String title, String content, String author) {
+    public Post(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    /**
-     * 게시글 수정
-     *
-     * @param title 수정할 제목
-     * @param content 수정할 내용
-     * @param author 수정할 작성자
-     */
-    public void update(String title, String content, String author) {
+    // 비즈니스 메서드
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.author = author;
+    }
+
+    // ✨ author 관련 편의 메서드 추가
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : null;
     }
 }
