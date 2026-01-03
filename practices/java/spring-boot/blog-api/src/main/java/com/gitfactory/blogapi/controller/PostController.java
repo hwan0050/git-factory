@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * 게시글 관리 REST API 컨트롤러
- */
 @Tag(name = "게시글 API", description = "게시글 CRUD 및 검색 API")
 @RestController
 @RequestMapping("/api/posts")
@@ -28,7 +25,20 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/{id}")
+    // ✨ /search와 /author를 /{id}보다 먼저 배치
+    @GetMapping("/search")
+    public ResponseEntity<List<PostResponse>> searchPosts(@RequestParam String keyword) {
+        List<PostResponse> posts = postService.searchByTitle(keyword);
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/search/author")  // ✨ 경로 변경: /author/{author} → /search/author?keyword=
+    public ResponseEntity<List<PostResponse>> getPostsByAuthor(@RequestParam String keyword) {
+        List<PostResponse> posts = postService.getPostsByAuthor(keyword);
+        return ResponseEntity.ok(posts);
+    }
+
+    @GetMapping("/{id}")  // ✨ 이제 이게 마지막
     public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
         PostResponse post = postService.getPostById(id);
         return ResponseEntity.ok(post);
@@ -53,17 +63,5 @@ public class PostController {
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<PostResponse>> searchPosts(@RequestParam String keyword) {
-        List<PostResponse> posts = postService.searchByTitle(keyword);
-        return ResponseEntity.ok(posts);
-    }
-
-    @GetMapping("/author/{author}")
-    public ResponseEntity<List<PostResponse>> getPostsByAuthor(@PathVariable String author) {
-        List<PostResponse> posts = postService.getPostsByAuthor(author);
-        return ResponseEntity.ok(posts);
     }
 }

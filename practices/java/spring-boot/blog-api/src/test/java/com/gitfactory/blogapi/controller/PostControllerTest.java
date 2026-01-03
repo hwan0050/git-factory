@@ -53,11 +53,10 @@ class PostControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Record 타입이므로 생성자 사용
         postRequest = new PostRequest(
                 "테스트 제목",
                 "테스트 내용",
-                "테스트 작성자"
+                1L
         );
 
         postResponse = new PostResponse(
@@ -65,6 +64,7 @@ class PostControllerTest {
                 "테스트 제목",
                 "테스트 내용",
                 "테스트 작성자",
+                1L,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -129,11 +129,11 @@ class PostControllerTest {
     @Test
     @DisplayName("PUT /api/posts/{id} - 포스트 수정 성공")
     void updatePost() throws Exception {
-        // Given - Record 타입 생성자 사용
+        // Given
         PostRequest updateRequest = new PostRequest(
                 "수정된 제목",
                 "수정된 내용",
-                "테스트 작성자"
+                1L
         );
 
         PostResponse updateResponse = new PostResponse(
@@ -141,6 +141,7 @@ class PostControllerTest {
                 "수정된 제목",
                 "수정된 내용",
                 "테스트 작성자",
+                1L,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -184,16 +185,17 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/posts/author/{author} - 작성자로 검색")
+    @DisplayName("GET /api/posts/search/author - 작성자로 검색")
     void getPostsByAuthor() throws Exception {
         // Given
         List<PostResponse> posts = Arrays.asList(postResponse);
         given(postService.getPostsByAuthor("테스트 작성자")).willReturn(posts);
 
         // When & Then
-        mockMvc.perform(get("/api/posts/author/{author}", "테스트 작성자"))
+        mockMvc.perform(get("/api/posts/search/author")
+                        .param("keyword", "테스트 작성자"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].author", is("테스트 작성자")));
+                .andExpect(jsonPath("$[0].authorName", is("테스트 작성자")));
     }
 }

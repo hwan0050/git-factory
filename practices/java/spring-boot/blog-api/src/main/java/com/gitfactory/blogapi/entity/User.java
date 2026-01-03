@@ -12,26 +12,28 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "users")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class Post {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
-    private String title;
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String content;
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
 
-    // ✨ 기존 author 필드 제거하고 User 연관 관계로 변경
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User author;
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private UserRole role;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -42,20 +44,19 @@ public class Post {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Post(String title, String content, User author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
+    public User(String username, String email, String password, UserRole role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role != null ? role : UserRole.USER;
     }
 
     // 비즈니스 메서드
-    public void update(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
     }
 
-    // ✨ author 관련 편의 메서드 추가
-    public String getAuthorName() {
-        return author != null ? author.getUsername() : null;
+    public void updateEmail(String newEmail) {
+        this.email = newEmail;
     }
 }
