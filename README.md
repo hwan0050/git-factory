@@ -728,11 +728,47 @@ fix(test): Resolve JPA Auditing conflict in tests
 - [x] Phase 2-4: TDD & Testing
 - [x] Phase 2-5: API Docs & Integration Test
 
-### Phase 3 준비
-- [ ] Spring Security & JWT
-- [ ] JPA 연관 관계 매핑
-- [ ] 페이징 & 정렬
-- [ ] Redis 캐싱
+### 🔄 Phase 3: 고급 JPA & 보안 (진행 중)
+
+**시작일**: 2026-01-03  
+**현재 진도**: Phase 3-1 완료 ✅
+
+---
+
+#### ✅ Phase 3-1: JPA 연관 관계 매핑 (완료!)
+
+**학습 기간**: 2026-01-03 (1일)  
+**학습 시간**: 약 4-5시간  
+**완료 커밋**: 17개
+
+**학습 내용**:
+- JPA 연관 관계 매핑 (@ManyToOne)
+- User 엔티티 설계 및 Post-User 연관 관계 구현
+- FetchType.LAZY 지연 로딩 전략
+- Query Methods 네이밍 규칙
+- Spring MVC 경로 매칭 우선순위
+
+**주요 성과**:
+- User 엔티티 신규 생성 (JPA Auditing)
+- Post 엔티티 리팩토링 (String → User)
+- 전체 테스트 코드 수정 (53개 전부 통과 ✅)
+- Spring MVC 경로 충돌 해결
+- FetchType.LAZY 적용 (N+1 문제 대비)
+
+**문서**:
+- [PHASE3-1_HANDOVER.md](./docs/PHASE3-1_HANDOVER.md)
+- [JPA_LEARNING.md](./docs/JPA_LEARNING.md)
+
+---
+
+#### 📋 Phase 3 다음 단계
+
+- [x] Phase 3-1: JPA 연관 관계 매핑
+- [ ] Phase 3-2: N+1 문제 해결
+- [ ] Phase 3-3: Comment & Category 엔티티
+- [ ] Phase 3-4: 페이징 & 정렬
+- [ ] Phase 3-5: Spring Security & JWT
+- [ ] Phase 3-6: Redis 캐싱
 
 ---
 
@@ -750,6 +786,17 @@ fix(test): Resolve JPA Auditing conflict in tests
 ---
 
 ## 📝 업데이트 로그
+
+### 2026-01-03 - Phase 3-1 완료! 🎉
+- ✅ JPA 연관 관계 매핑 (@ManyToOne) 학습 완료
+- ✅ User 엔티티 신규 생성 (UserRole Enum)
+- ✅ Post-User 연관 관계 구현
+- ✅ FetchType.LAZY 지연 로딩 적용
+- ✅ 전체 테스트 코드 리팩토링 (53개 100% 통과)
+- ✅ Spring MVC 경로 충돌 해결
+- ✅ Query Methods 네이밍 규칙 학습
+- 📊 총 600줄 코드, 400줄 테스트, 1,800줄 문서
+- **Phase 3 시작!** 🚀
 
 ### 2025-12-20 - Phase 2-5 Module 3 완료! 🎉
 - ✅ @SpringBootTest 통합 테스트 5개 작성

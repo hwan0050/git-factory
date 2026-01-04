@@ -728,11 +728,91 @@ fix(test): Resolve JPA Auditing conflict in tests
 - [x] Phase 2-4: TDD & Testing
 - [x] Phase 2-5: API Docs & Integration Test
 
-### Phase 3 준비
-- [ ] Spring Security & JWT
-- [ ] JPA 연관 관계 매핑
-- [ ] 페이징 & 정렬
-- [ ] Redis 캐싱
+### 🔄 Phase 3: 고급 JPA & 보안 (진행 중)
+
+**시작일**: 2026-01-03  
+**현재 진도**: Phase 3-1 완료 ✅
+
+---
+
+#### ✅ Phase 3-1: JPA 연관 관계 매핑 (완료!)
+
+**학습 기간**: 2026-01-03 (1일)  
+**학습 시간**: 약 4-5시간  
+**완성 코드**: ~600줄 (Entity, DTO, Service, Controller 수정)  
+**테스트 코드**: ~400줄 (전체 테스트 수정)  
+**완료 커밋**: 17개
+
+**학습 내용**:
+- JPA 연관 관계 매핑 (@ManyToOne)
+- User 엔티티 설계 (UserRole Enum)
+- Post-User 연관 관계 구현
+- FetchType.LAZY 지연 로딩 전략
+- Query Methods 네이밍 규칙
+- DTO 변환 패턴 (Entity ↔ DTO)
+- Spring MVC 경로 매칭 우선순위
+
+**완성 프로젝트**: `blog-api` (리팩토링)
+- User-Post ManyToOne 관계 구현
+- UserRepository 9개 메서드
+- PostRepository Query Methods 확장
+- ResourceNotFoundException 예외 처리
+- Spring MVC 경로 충돌 해결
+- 53개 테스트 100% 통과 ✅
+
+**ERD**:
+```
+┌─────────────────┐         ┌─────────────────┐
+│     users       │         │     posts       │
+├─────────────────┤         ├─────────────────┤
+│ id (PK)         │◄────────│ id (PK)         │
+│ username (UQ)   │    1    │ user_id (FK)    │ N
+│ email (UQ)      │         │ title           │
+│ password        │         │ content         │
+│ role (ENUM)     │         │ created_at      │
+│ created_at      │         │ updated_at      │
+│ updated_at      │         └─────────────────┘
+└─────────────────┘
+```
+
+**주요 성과**:
+- User 엔티티 신규 생성 (JPA Auditing)
+- Post 엔티티 리팩토링 (String → User)
+- DTO 전면 수정 (PostRequest, PostResponse)
+- 전체 테스트 코드 수정 (53개 전부 통과)
+- Spring MVC 경로 충돌 해결
+- FetchType.LAZY 적용 (N+1 문제 대비)
+
+**해결한 이슈**:
+1. **테스트 User 의존성** - 모든 테스트에 UserRepository Mock/실제 User 추가
+2. **Spring MVC 경로 충돌** - 구체적 경로를 `/{id}`보다 먼저 배치
+3. **DTO 파라미터 불일치** - `authorId` 필드 추가
+
+**문서**:
+- [PHASE3-1_HANDOVER.md](./docs/PHASE3-1_HANDOVER.md)
+- [JPA_LEARNING.md](./docs/JPA_LEARNING.md)
+
+---
+
+#### 🔄 Phase 3-2: N+1 문제 해결 & 성능 최적화 (진행 중)
+
+**예정 학습 내용**:
+- N+1 문제 확인 및 재현
+- Fetch Join 구현
+- @EntityGraph 활용
+- Batch Size 설정
+- 성능 측정 및 비교
+
+---
+
+#### 📋 Phase 3 다음 단계
+
+- [x] Phase 3-1: JPA 연관 관계 매핑
+- [ ] Phase 3-2: N+1 문제 해결
+- [ ] Phase 3-3: Comment & Category 엔티티
+- [ ] Phase 3-4: 페이징 & 정렬
+- [ ] Phase 3-5: Spring Security & JWT
+- [ ] Phase 3-6: Redis 캐싱
 
 ---
 
