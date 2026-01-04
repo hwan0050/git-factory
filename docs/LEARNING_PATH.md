@@ -1,898 +1,473 @@
-# 🏭 Git Factory
+# 📚 Git Factory Learning Path
 
-> 🎓 **체계적인 풀스택 개발 학습 저장소** - Git 워크플로우부터 MSA까지
+> **학습 경로 가이드** - 체계적인 풀스택 개발 여정
 
-[![GitHub stars](https://img.shields.io/github/stars/hwan0050/git-factory?style=social)](https://github.com/hwan0050/git-factory/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/hwan0050/git-factory?style=social)](https://github.com/hwan0050/git-factory/network/members)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
-Git Factory는 **현대적인 웹 개발 기술과 MSA(Microservices Architecture)**를 학습하기 위한 체계적인 저장소입니다.
-
-## ✨ 특징
-
-- ✅ **Git 워크플로우** - 브랜치 전략, 협업, 코드 리뷰
-- ✅ **풀스택 개발** - Frontend부터 Backend까지
-- ✅ **MSA 아키텍처** - 마이크로서비스 설계 및 구현
-- ✅ **최신 개발 방법론** - TDD, Clean Code, Agile
-- ✅ **실전 프로젝트** - 학습한 내용을 실제 프로젝트에 적용
+이 문서는 Git Factory 프로젝트의 전체 학습 경로를 상세히 안내합니다.
 
 ---
 
-## 🎯 프로젝트 개요
+## 🎯 학습 목표
 
-Git Factory는 단순한 코드 저장소가 아닌, **체계적인 학습 여정**을 기록하는 공간입니다.  
-각 Phase는 실전 프로젝트를 통해 기술을 익히고, 상세한 문서화를 통해 지식을 내재화합니다.
-
-### 🎯 핵심 학습 원칙
-
-1. **실전 중심**: 이론보다 실습, 튜토리얼보다 프로젝트
+1. **실전 중심 학습**: 이론보다 실습, 튜토리얼보다 프로젝트
 2. **체계적 문서화**: 모든 학습 과정을 상세히 기록
-3. **점진적 발전**: 각 Phase가 다음 Phase의 기반이 됨
-4. **Git Workflow**: 실무와 동일한 브랜치 전략 및 PR 프로세스
+3. **점진적 발전**: 각 Phase가 다음 Phase의 기반
+4. **실무 역량 강화**: Git Workflow부터 MSA까지
 
 ---
 
-## 🗺️ 학습 로드맵
+## 📅 Phase 별 학습 계획
 
-### ✅ Phase 1: 기초 다지기 (완료!)
+### ✅ Phase 1: 기초 다지기 (완료)
 
-**학습 기간**: 2024-11-18 ~ 2024-11-22 (5일)  
-**총 학습 시간**: 약 15시간  
-**완성 코드**: ~4,000줄  
-**완료 PR**: 4개
+**기간**: 2024-11-18 ~ 2024-11-22 (5일)  
+**목표**: Git, TypeScript, React 기초 완성
 
-#### 🎓 학습 목표
-- ✅ Git을 자유자재로 사용
-- ✅ TypeScript로 타입 안전한 코드 작성
-- ✅ React 핵심 개념 이해 및 활용
-- ✅ 실전 CRUD 애플리케이션 개발
+#### 학습 모듈
+1. **Git Workflow** (~2일)
+    - 브랜치 전략 (feature, develop, main)
+    - Conflict 해결 실습
+    - Conventional Commits
 
-#### 완료된 모듈
-- ✅ **Git 워크플로우 마스터**
-    - Git 기본 명령어, 브랜치 전략
-    - Conflict 해결, Merge vs Rebase
-    - Cherry-pick, Reset, Revert
-    - 워크플로우 가이드 작성 (~600줄)
+2. **TypeScript** (~1일)
+    - Type Guards 20개
+    - Utility Types 11개
+    - 실전 함수 45개
 
-- ✅ **TypeScript 완벽 정복**
-    - 기본 타입, Interface, Type Alias
-    - Generics, Utility Types (11개)
-    - Type Guards (20개)
-    - 유틸리티 함수 (45개)
-    - 총 ~1,400줄 코드
+3. **React Fundamentals** (~1일)
+    - Hooks (useState, useEffect)
+    - Custom Hooks
+    - Component 설계
 
-- ✅ **React 핵심 개념**
-    - 컴포넌트, Props, State
-    - useState, useEffect Hooks
-    - Custom Hook (useLocalStorage)
-    - Enhanced TodoList (필터링, 수정)
-    - 총 ~500줄 코드
-
-- ✅ **통합 실전 프로젝트**
-    - 🔖 **북마크 관리 앱** 완성!
-    - 완전한 CRUD 구현
-    - TypeScript + React 통합
-    - LocalStorage 영구 저장
-    - 필터링, 검색, 정렬 기능
-    - 총 ~800줄 코드
-
-#### 📊 Phase 1 최종 성과
-- **코드**: ~4,000줄
-- **PR**: 4개 (모두 Merged)
-- **프로젝트**: 1개 (실사용 가능)
-- **학습 시간**: 약 15시간
-- **문서**: GIT_WORKFLOW_GUIDE.md 외 5개
+4. **통합 프로젝트** (~1일)
+    - 북마크 관리 앱 완성
+    - CRUD 구현
+    - LocalStorage 활용
 
 ---
 
-### 🔄 Phase 2: 중급 개발 (완료!)
+### ✅ Phase 2: 중급 개발 (완료)
 
-**시작일**: 2025-11-23  
-**완료일**: 2025-12-20  
-**현재 진도**: Phase 2 전체 완료 ✅
+**기간**: 2025-11-23 ~ 2025-12-20 (28일)  
+**목표**: Backend 기초 + 테스트 + 문서화
 
----
+#### 학습 모듈
 
-#### ✅ Phase 2-1: Next.js 14 App Router (완료!)
+**2-1. Next.js 14** (1일)
+- App Router 구조
+- Server/Client Components
+- Dynamic Routes
 
-**학습 기간**: 2025-11-23 (1일)  
-**학습 시간**: 약 4-5시간  
-**완성 코드**: ~800줄  
-**완료 커밋**: 6개
+**2-2. Spring Boot + JPA** (1일)
+- REST API 설계
+- JPA Entity & Repository
+- 계층형 아키텍처
 
-**학습 내용**:
-- Next.js 14 프로젝트 초기화 (TypeScript + Tailwind CSS)
-- App Router 파일 기반 라우팅
-- Server Components vs Client Components
-- Layouts & Nested Routes
-- Dynamic Routes & Data Fetching
-- Loading States & Error Handling
+**2-3. Docker** (1일)
+- Containerization 개념
+- Dockerfile 작성
+- Docker Compose
 
-**완성 프로젝트**: `app-router`
-- 파일 기반 라우팅 15개 파일
-- Server/Client Components 구분
-- Dynamic Routes 구현
-- Loading/Error Handling 패턴
+**2-4. TDD & Testing** (2일)
+- Repository/Service/Controller 테스트
+- Mockito & MockMvc
+- 25개 테스트 작성
 
-**문서**:
-- [NEXTJS_LEARNING.md](./practices/nextjs/NEXTJS_LEARNING.md)
-- [PHASE2-1_HANDOVER.md](./practices/nextjs/PHASE2-1_HANDOVER.md)
-
----
-
-#### ✅ Phase 2-2: Spring Boot 3.x + JPA (완료!)
-
-**학습 기간**: 2025-11-25 (1일)  
-**학습 시간**: 약 3-4시간  
-**완성 코드**: ~350줄  
-**완료 커밋**: 3개
-
-**학습 내용**:
-- Spring Boot 프로젝트 구조
-- JPA Entity 설계 및 Auditing
-- Repository 패턴 (쿼리 메서드)
-- Service 계층 (트랜잭션 관리)
-- REST Controller (7개 API 엔드포인트)
-- DTO 패턴 (Request/Response)
-- H2 Database 연동
-
-**완성 프로젝트**: `blog-api`
-- CRUD 기능 완전 구현
-- RESTful API 설계
-- JPA Auditing
-- 계층형 아키텍처 (Controller-Service-Repository)
-- 7개 API 엔드포인트
-
-**문서**:
-- [SPRING_BOOT_LEARNING.md](./docs/SPRING_BOOT_LEARNING.md)
-- [PHASE2-2_HANDOVER.md](./docs/PHASE2-2_HANDOVER.md)
+**2-5. API 문서화 & 통합 테스트** (3일)
+- REST Docs
+- Swagger/OpenAPI
+- JaCoCo 커버리지 97%
 
 ---
 
-#### ✅ Phase 2-3: Docker & Containerization (완료!)
-
-**학습 기간**: 2025-11-27 (1일)  
-**학습 시간**: 약 2-3시간  
-**완성 코드**: ~120줄  
-**완료 커밋**: 2개
-
-**학습 내용**:
-- Docker 기본 개념 및 명령어
-- Dockerfile 작성 (Multi-stage build)
-- Docker Compose 활용
-- Spring Boot + PostgreSQL 컨테이너화
-- 환경 변수 관리 (H2 ↔ PostgreSQL 전환)
-- 볼륨을 통한 데이터 영속성
-- 네트워크 구성 및 서비스 간 통신
-
-**주요 성과**:
-- Multi-stage Dockerfile 작성
-- docker-compose.yml 구성
-- 환경별 DB 전환 전략
-- 상세한 학습 노트 및 핸드오버 문서
-
-**기술적 제약**:
-- Windows 10 build 호환성 문제로 Docker Desktop 미설치
-- 개념 학습 및 설정 완료, 실행 환경은 추후 구축 예정
-
-**문서**:
-- [DOCKER_LEARNING.md](./docs/DOCKER_LEARNING.md) (~800 lines)
-- [PHASE2-3_HANDOVER.md](./docs/PHASE2-3_HANDOVER.md) (~600 lines)
-
----
-
-#### ✅ Phase 2-4: TDD & Spring Boot Testing (완료!)
-
-**학습 기간**: 2025-11-30 ~ 2025-12-01 (2일)  
-**학습 시간**: 약 6-7시간  
-**완성 코드**: ~800줄 (테스트 코드)  
-**완료 커밋**: 예정
-
-**학습 내용**:
-- TDD (Test-Driven Development) 사이클
-- Spring Boot Test Slice Annotations
-    - `@DataJpaTest` - Repository 계층 테스트
-    - `@WebMvcTest` - Controller 계층 테스트
-    - `@ExtendWith(MockitoExtension.class)` - Service 계층 테스트
-- Mockito 활용한 단위 테스트
-- MockMvc를 활용한 API 테스트
-- Given-When-Then 패턴
-
-**테스트 구조**:
-```
-src/test/java/com/gitfactory/blogapi/
-├── repository/
-│   └── PostRepositoryTest.java       (7개 테스트) ✅
-├── service/
-│   └── PostServiceTest.java          (10개 테스트) ✅
-└── controller/
-    └── PostControllerTest.java       (8개 테스트) ✅
-
-총 25개 테스트 케이스 - ALL PASSED ✅
-```
-
-**주요 성과**:
-- 계층별 테스트 완전 구현 (Repository, Service, Controller)
-- 100% 테스트 통과율 (25/25)
-- JPA Auditing 분리 및 테스트 격리
-- GlobalExceptionHandler 구현 (404 에러 처리)
-- 상세한 학습 노트 및 트러블슈팅 문서
-
-**해결한 이슈**:
-1. JPA Auditing 에러 → JpaAuditingConfig 분리
-2. Import 충돌 (Hamcrest vs Mockito) → 명시적 import
-3. 404 예외 처리 → GlobalExceptionHandler 추가
-4. 파라미터 이름 불일치 수정 (title → keyword)
-
-**추가 구현**:
-- `JpaAuditingConfig.java` - JPA Auditing 설정 분리
-- `GlobalExceptionHandler.java` - 전역 예외 처리
-
-**문서**:
-- [TESTING_LEARNING.md](./docs/TESTING_LEARNING.md) (~800 lines)
-- [PHASE2-4_HANDOVER.md](./docs/PHASE2-4_HANDOVER.md) (~600 lines)
-
----
-
-#### ✅ Phase 2-5: API Documentation & Integration Testing (완료!) 🎉
-
-**학습 기간**: 2025-12-06 ~ 2025-12-20 (3일)  
-**총 학습 시간**: 약 10-12시간  
-**완성 코드**: ~1,500줄  
-**완료 PR**: #16, #17
-
-**완료된 모듈**:
-- ✅ **Module 1**: Spring REST Docs (테스트 기반 문서)
-- ✅ **Module 2**: Swagger/OpenAPI (인터랙티브 문서)
-- ✅ **Module 3**: 통합 테스트 및 JaCoCo 커버리지
-
----
-
-**Module 1 & 2: REST Docs + Swagger (2025-12-06)**
-
-**학습 내용**:
-- REST Docs 의존성 및 AsciiDoctor 플러그인 설정
-- 테스트 기반 API 문서 자동 생성
-- 7개 API 문서화 테스트 작성
-- springdoc-openapi 의존성 추가
-- Swagger UI 실행 및 테스트
-
-**주요 성과**:
-- 7개 API 완전 문서화 (REST Docs + Swagger)
-- 32개 테스트 100% 통과 (25 + 7)
-- Spring Boot 버전 호환성 문제 해결 (3.4.12 → 3.3.5)
-- Record 타입 DTO 패턴 확립
-
-**문서**:
-- [SWAGGER_LEARNING.md](./docs/SWAGGER_LEARNING.md) (~1,000 lines)
-- [PHASE2-5_MODULE1-2_HANDOVER.md](./docs/PHASE2-5_MODULE1-2_HANDOVER.md) (~800 lines)
-
----
-
-**Module 3: 통합 테스트 & JaCoCo (2025-12-20)**
-
-**학습 내용**:
-- @SpringBootTest 통합 테스트 작성
-- MockMvc를 활용한 E2E 테스트
-- JaCoCo 플러그인 설정 및 커버리지 측정
-- 통합 테스트 시나리오 설계 (CRUD 플로우, 검색)
-- PostService update/delete 로직 개선
-
-**통합 테스트 구조**:
-```
-src/test/java/com/gitfactory/blogapi/
-└── integration/
-    └── BlogApiIntegrationTest.java       (5개 테스트) ✅
-
-테스트 시나리오:
-1. 게시글 전체 CRUD 플로우 (POST→GET→PUT→DELETE→404)
-2. 여러 게시글 생성 후 전체 조회
-3. 제목으로 게시글 검색
-4. 작성자로 게시글 검색
-5. 존재하지 않는 게시글 조회 (404)
-```
-
-**JaCoCo 커버리지 결과**:
-```
-전체 커버리지:      97% (204/210 instructions)
-브랜치 커버리지:    50% (2/4 branches)
-테스트 개수:        38개
-테스트 성공률:      100%
-
-패키지별 커버리지:
-├─ service:         100% ✅
-├─ controller:      100% ✅
-├─ entity:          100% ✅
-└─ exception:       73%  🟢
-```
-
-**주요 성과**:
-- 통합 테스트 5개 작성 완료
-- 전체 테스트 38개 100% 통과
-- 코드 커버리지 97% 달성 (목표 80% 초과)
-- JaCoCo HTML 리포트 생성
-- 트러블슈팅 5가지 해결
-
-**해결한 이슈**:
-1. Record 타입 DTO builder() 에러 → 생성자 사용으로 해결
-2. Post Entity getter 메서드 불일치 → getTitle() 사용
-3. PostService update() save() 누락 → 명시적 save() 호출 추가
-4. PostService delete() 로직 불일치 → findById + delete로 변경
-5. 검색 API 파라미터 불일치 → keyword로 통일
-
-**추가 구현**:
-- `BlogApiIntegrationTest.java` (~400 lines)
-- `build.gradle` JaCoCo 설정 추가
-- PostService.java update/delete 메서드 수정
-
-**문서**:
-- [PHASE2-5_MODULE3_HANDOVER.md](./docs/PHASE2-5_MODULE3_HANDOVER.md) (~800 lines)
-
-**JaCoCo 리포트**:
-- HTML: `build/reports/jacoco/test/html/index.html`
-- XML: `build/reports/jacoco/test/jacocoTestReport.xml`
-
----
-
-#### 🎉 Phase 2-5 전체 완료!
-
-**최종 성과**:
-```
-전체 테스트:        38개 (100% 통과 ✅)
-코드 커버리지:      97% 🎉
-브랜치 커버리지:    50%
-
-테스트 구성:
-├─ 단위 테스트:          30개 (Repository, Service, Controller)
-├─ REST Docs 테스트:     7개 (API 문서 자동 생성)
-└─ 통합 테스트:          5개 (E2E 시나리오)
-
-API 문서:           REST Docs + Swagger 완비
-학습 문서:          3개 (~2,600 lines)
-```
-
----
-
-### Phase 3: Advanced Backend 🚀
-**상태**: 📅 예정
-
-- Security & Authentication (Spring Security, JWT)
-- Microservices Architecture
-- Message Queues (RabbitMQ, Kafka)
-- Caching Strategies (Redis)
-
----
-
-### Phase 4: Frontend & Full-Stack Integration 🎨
-**상태**: 📅 예정
-
-- Next.js & Server Components
-- State Management (Redux, Zustand)
-- API Integration
-- Full-Stack 프로젝트
-
----
-
-## 📁 프로젝트 구조
-
-```
-git-factory/
-├── docs/                                    # 📚 모든 학습 문서 통합
-│   ├── SPRING_BOOT_LEARNING.md             (Phase 2-2)
-│   ├── PHASE2-2_HANDOVER.md                (Phase 2-2)
-│   ├── DOCKER_LEARNING.md                  (Phase 2-3, ~800 lines)
-│   ├── PHASE2-3_HANDOVER.md                (Phase 2-3, ~600 lines)
-│   ├── TESTING_LEARNING.md                 (Phase 2-4, ~800 lines)
-│   ├── PHASE2-4_HANDOVER.md                (Phase 2-4, ~600 lines)
-│   ├── SWAGGER_LEARNING.md                 (Phase 2-5, ~1,000 lines)
-│   ├── PHASE2-5_MODULE1-2_HANDOVER.md      (Phase 2-5, ~800 lines)
-│   └── PHASE2-5_MODULE3_HANDOVER.md        (Phase 2-5, ~800 lines) ✨
-│
-├── workflows/                               # 🔄 Git 워크플로우 학습
-│   └── git-practice/
-│       ├── GIT_WORKFLOW_GUIDE.md           (~600 lines)
-│       └── practice.txt
-│
-├── practices/                               # 💻 실습 프로젝트
-│   ├── typescript/                         (Phase 1)
-│   │   └── utilities/
-│   │       ├── type-guards.ts             (20개)
-│   │       ├── utility-types.ts           (11개)
-│   │       └── utility-functions.ts       (45개)
-│   │
-│   ├── react/                              (Phase 1)
-│   │   └── components/
-│   │       ├── src/
-│   │       │   ├── hooks/
-│   │       │   │   └── useLocalStorage.ts
-│   │       │   ├── Counter.tsx
-│   │       │   ├── TodoList.tsx
-│   │       │   └── TodoListEnhanced.tsx
-│   │       └── package.json
-│   │
-│   ├── nextjs/                             (Phase 2-1)
-│   │   ├── app-router/                    (~800 lines, 15개 파일)
-│   │   ├── NEXTJS_LEARNING.md
-│   │   └── PHASE2-1_HANDOVER.md
-│   │
-│   └── java/
-│       └── spring-boot/
-│           └── blog-api/                   (Phase 2-2, 2-3, 2-4, 2-5)
-│               ├── src/
-│               │   ├── main/
-│               │   │   ├── java/
-│               │   │   │   └── com/gitfactory/blogapi/
-│               │   │   │       ├── controller/
-│               │   │   │       │   └── PostController.java
-│               │   │   │       ├── service/
-│               │   │   │       │   └── PostService.java
-│               │   │   │       ├── repository/
-│               │   │   │       │   └── PostRepository.java
-│               │   │   │       ├── entity/
-│               │   │   │       │   └── Post.java
-│               │   │   │       ├── dto/
-│               │   │   │       │   ├── PostRequest.java
-│               │   │   │       │   └── PostResponse.java
-│               │   │   │       ├── config/
-│               │   │   │       │   ├── JpaAuditingConfig.java
-│               │   │   │       │   └── SwaggerConfig.java
-│               │   │   │       └── exception/
-│               │   │   │           └── GlobalExceptionHandler.java
-│               │   │   └── resources/
-│               │   │       └── application.properties
-│               │   │
-│               │   ├── docs/
-│               │   │   └── asciidoc/
-│               │   │       └── index.adoc
-│               │   │
-│               │   └── test/
-│               │       └── java/
-│               │           └── com/gitfactory/blogapi/
-│               │               ├── repository/
-│               │               │   └── PostRepositoryTest.java       (7개)
-│               │               ├── service/
-│               │               │   └── PostServiceTest.java          (10개)
-│               │               ├── controller/
-│               │               │   ├── PostControllerTest.java       (8개)
-│               │               │   └── PostControllerRestDocsTest.java (7개)
-│               │               └── integration/
-│               │                   └── BlogApiIntegrationTest.java  (5개) ✨
-│               │
-│               ├── build/
-│               │   ├── generated-snippets/                          (7개 API)
-│               │   ├── docs/asciidoc/index.html
-│               │   └── reports/jacoco/test/html/index.html          ✨
-│               │
-│               ├── Dockerfile                          (Phase 2-3)
-│               ├── docker-compose.yml                  (Phase 2-3)
-│               ├── .dockerignore                       (Phase 2-3)
-│               └── build.gradle                        (REST Docs + Swagger + JaCoCo) ✨
-│
-├── projects/                                # 🚀 실전 프로젝트
-│   └── bookmark-manager/                   (Phase 1)
-│       ├── src/
-│       │   ├── components/                 (4개)
-│       │   ├── hooks/                      (useLocalStorage)
-│       │   ├── types/                      (8개 타입)
-│       │   ├── utils/                      (7개 함수)
-│       │   └── App.tsx
-│       └── package.json
-│
-└── README.md                                (This file)
-```
-
----
-
-## 🧪 테스트 실행 방법
-
-### blog-api 테스트
-
-```bash
-# 프로젝트 디렉토리로 이동
-cd practices/java/spring-boot/blog-api
-
-# 전체 테스트 실행
-./gradlew clean test
-
-# 특정 테스트만 실행
-./gradlew test --tests "com.gitfactory.blogapi.repository.PostRepositoryTest"
-./gradlew test --tests "com.gitfactory.blogapi.service.PostServiceTest"
-./gradlew test --tests "com.gitfactory.blogapi.controller.PostControllerTest"
-./gradlew test --tests "com.gitfactory.blogapi.controller.PostControllerRestDocsTest"
-./gradlew test --tests "com.gitfactory.blogapi.integration.BlogApiIntegrationTest"
-
-# 테스트 리포트 확인
-# build/reports/tests/test/index.html
-```
-
-**예상 결과**:
-```
-BUILD SUCCESSFUL in 18s
-✅ BlogApiIntegrationTest:     5/5   (100%)
-✅ PostRepositoryTest:         7/7   (100%)
-✅ PostServiceTest:            10/10 (100%)
-✅ PostControllerTest:         8/8   (100%)
-✅ PostControllerRestDocsTest: 7/7   (100%)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ 총합:                       38/38 (100%)
-```
-
-### JaCoCo 커버리지 확인
-
-```bash
-# 테스트 + 커버리지 리포트 생성
-./gradlew clean test jacocoTestReport
-
-# 리포트 확인
-# build/reports/jacoco/test/html/index.html 브라우저에서 열기
-```
-
----
-
-## 📚 API 문서 확인
-
-### REST Docs (정적 HTML)
-```bash
-# AsciiDoc → HTML 변환
-./gradlew asciidoctor
-
-# 문서 확인
-# build/docs/asciidoc/index.html 브라우저에서 열기
-```
-
-### Swagger UI (인터랙티브)
-```bash
-# 애플리케이션 실행
-./gradlew bootRun
-
-# 브라우저 접속
-http://localhost:8080/swagger-ui/index.html
-
-# OpenAPI JSON
-http://localhost:8080/v3/api-docs
-```
-
----
-
-## 🐳 Docker 실행 (Phase 2-3)
-
-### Docker 명령어
-
-```bash
-# 프로젝트 디렉토리로 이동
-cd practices/java/spring-boot/blog-api
-
-# Docker 이미지 빌드
-docker build -t blog-api:latest .
-
-# Docker Compose로 실행 (Spring Boot + PostgreSQL)
-docker-compose up -d
-
-# 로그 확인
-docker-compose logs -f
-
-# 컨테이너 중지
-docker-compose down
-
-# 볼륨까지 삭제
-docker-compose down -v
-```
-
-**참고**: Windows 10 build 호환성 문제로 현재 Docker Desktop 미설치 상태
-
----
-
-## 💻 개발 환경
-
-### 필수 도구
-- **OS**: Windows 10
-- **IDE**: IntelliJ IDEA, VSCode
-- **Shell**: PowerShell
-- **JDK**: 17
-- **Node.js**: 18+
-- **Git**: 2.40+
-
-### 선택 도구
-- **Docker Desktop**: (설치 예정)
-- **Postman**: API 테스트
-- **DBeaver**: DB 관리
-
----
-
-## 📖 학습 문서
-
-### Phase 1
-- [Phase 1 Handover Document](./HANDOVER_PHASE1.md)
-- Git Workflow Guide (600 lines)
-- TypeScript Learning Notes
-- React Implementation Guide
-
-### Phase 2-2: Spring Boot
-- [SPRING_BOOT_LEARNING.md](./docs/SPRING_BOOT_LEARNING.md)
-- [PHASE2-2_HANDOVER.md](./docs/PHASE2-2_HANDOVER.md)
-
-### Phase 2-3: Docker
-- [DOCKER_LEARNING.md](./docs/DOCKER_LEARNING.md) - 800 lines
-    - Docker 기본 개념
-    - Dockerfile 작성법
-    - Docker Compose 활용
-    - 실전 예제 및 명령어
-- [PHASE2-3_HANDOVER.md](./docs/PHASE2-3_HANDOVER.md) - 600 lines
-    - 구현 내용 상세
-    - 주요 이슈 및 해결 방법
-    - 인수인계 가이드
-
-### Phase 2-4: TDD & Testing
-- [TESTING_LEARNING.md](./docs/TESTING_LEARNING.md) - 800 lines
-    - TDD 개념 및 사이클
-    - Spring Boot Test Annotations
-    - Mockito & MockMvc 사용법
-    - Given-When-Then 패턴
-    - 실전 예제 및 트러블슈팅
-- [PHASE2-4_HANDOVER.md](./docs/PHASE2-4_HANDOVER.md) - 600 lines
-    - 테스트 구조 상세
-    - 25개 테스트 케이스 설명
-    - 주요 이슈 및 해결 방법
-    - 인수인계 가이드
-
-### Phase 2-5: API Documentation & Integration Testing
-- [SWAGGER_LEARNING.md](./docs/SWAGGER_LEARNING.md) - 1,000 lines
-    - Spring REST Docs 개념 및 구현
-    - Swagger/OpenAPI 통합
-    - 테스트 기반 문서 생성
-    - AsciiDoc 작성법
-    - REST Docs vs Swagger 비교
-    - 트러블슈팅 (버전 호환성, Record 타입)
-- [PHASE2-5_MODULE1-2_HANDOVER.md](./docs/PHASE2-5_MODULE1-2_HANDOVER.md) - 800 lines
-    - Module 1 & 2 상세 구현
-    - 7개 API 문서화 완료
-    - Swagger UI 설정
-    - 주요 이슈 및 해결 방법
-    - 인수인계 가이드
-- [PHASE2-5_MODULE3_HANDOVER.md](./docs/PHASE2-5_MODULE3_HANDOVER.md) - 800 lines
-    - 통합 테스트 5개 작성
-    - JaCoCo 커버리지 97% 달성
-    - E2E 테스트 시나리오
-    - 트러블슈팅 5가지
-    - 인수인계 가이드
-
----
-
-## 🎯 Git Workflow
-
-### 브랜치 전략
-
-```
-main (프로덕션)
-  ↑
-develop (개발)
-  ↑
-feature/* (기능 개발)
-```
-
-### 커밋 메시지 컨벤션
-
-```bash
-# Conventional Commits 형식
-<type>(<scope>): <subject>
-
-# 예시
-feat(blog-api): Add Post CRUD endpoints
-test(repository): Add PostRepositoryTest with 7 test cases
-docs(phase2-5): Complete Module 1 & 2 - REST Docs & Swagger
-fix(test): Resolve JPA Auditing conflict in tests
-```
-
-**Type**:
-- `feat`: 새로운 기능
-- `fix`: 버그 수정
-- `docs`: 문서 변경
-- `test`: 테스트 추가/수정
-- `refactor`: 리팩토링
-- `style`: 코드 포맷팅
-- `chore`: 빌드/설정 변경
-
----
-
-## 📊 학습 통계
-
-### ✅ Phase 1 (완료)
-- **기간**: 2024-11-18 ~ 2024-11-22 (5일)
-- **학습 시간**: 15시간
-- **커밋 수**: 50+
-- **작성 코드**: ~4,000 lines
-- **PR**: 4개 (모두 merge 완료)
-- **프로젝트**: 북마크 관리 앱 (실사용 가능)
-
-### ✅ Phase 2 (완료!)
-- **기간**: 2025-11-23 ~ 2025-12-20
-- **완료 모듈**: 2-1, 2-2, 2-3, 2-4, 2-5 (전체 완료!)
-- **작성 코드**:
-    - Java/Spring Boot: ~1,200 lines
-    - 테스트 코드: ~2,300 lines
-    - Docker 설정: ~120 lines
-    - Next.js: ~800 lines
-- **테스트 케이스**: 38개 (100% 통과 ✅)
-- **코드 커버리지**: 97% 🎉
-- **작성 문서**: ~7,000 lines (11개 문서)
-- **PR**: 17개
-
----
-
-## 🚀 다음 단계
-
-### Phase 2 완료! 🎉
-- [x] Phase 2-1: Next.js 14
-- [x] Phase 2-2: Spring Boot + JPA
-- [x] Phase 2-3: Docker
-- [x] Phase 2-4: TDD & Testing
-- [x] Phase 2-5: API Docs & Integration Test
-
-### 🔄 Phase 3: 고급 JPA & 보안 (진행 중)
+### 🔄 Phase 3: 고급 JPA & 성능 최적화 (진행 중)
 
 **시작일**: 2026-01-03  
-**현재 진도**: Phase 3-1 완료 ✅
+**현재 진도**: 3-2 완료 ✅  
+**목표**: JPA 심화, 성능 최적화, 보안
 
 ---
 
-#### ✅ Phase 3-1: JPA 연관 관계 매핑 (완료!)
+#### ✅ 3-1. JPA 연관 관계 매핑 (완료)
 
 **학습 기간**: 2026-01-03 (1일)  
-**학습 시간**: 약 4-5시간  
-**완성 코드**: ~600줄 (Entity, DTO, Service, Controller 수정)  
-**테스트 코드**: ~400줄 (전체 테스트 수정)  
-**완료 커밋**: 17개
+**목표**: Entity 간 관계 설정 및 LAZY Loading
 
 **학습 내용**:
-- JPA 연관 관계 매핑 (@ManyToOne)
-- User 엔티티 설계 (UserRole Enum)
-- Post-User 연관 관계 구현
-- FetchType.LAZY 지연 로딩 전략
-- Query Methods 네이밍 규칙
-- DTO 변환 패턴 (Entity ↔ DTO)
-- Spring MVC 경로 매칭 우선순위
+- @ManyToOne 관계 매핑
+- User 엔티티 설계
+- FetchType.LAZY 전략
+- Query Methods 네이밍
 
-**완성 프로젝트**: `blog-api` (리팩토링)
-- User-Post ManyToOne 관계 구현
-- UserRepository 9개 메서드
-- PostRepository Query Methods 확장
-- ResourceNotFoundException 예외 처리
-- Spring MVC 경로 충돌 해결
-- 53개 테스트 100% 통과 ✅
+**실습 과제**:
+- [x] User 엔티티 생성
+- [x] Post-User 관계 설정
+- [x] 53개 테스트 수정
+- [x] Spring MVC 경로 충돌 해결
 
-**ERD**:
-```
-┌─────────────────┐         ┌─────────────────┐
-│     users       │         │     posts       │
-├─────────────────┤         ├─────────────────┤
-│ id (PK)         │◄────────│ id (PK)         │
-│ username (UQ)   │    1    │ user_id (FK)    │ N
-│ email (UQ)      │         │ title           │
-│ password        │         │ content         │
-│ role (ENUM)     │         │ created_at      │
-│ created_at      │         │ updated_at      │
-│ updated_at      │         └─────────────────┘
-└─────────────────┘
-```
+**성과**:
+- ✅ User-Post ManyToOne 관계 구현
+- ✅ 53개 테스트 100% 통과
+- ✅ ERD 다이어그램 작성
 
-**주요 성과**:
-- User 엔티티 신규 생성 (JPA Auditing)
-- Post 엔티티 리팩토링 (String → User)
-- DTO 전면 수정 (PostRequest, PostResponse)
-- 전체 테스트 코드 수정 (53개 전부 통과)
-- Spring MVC 경로 충돌 해결
-- FetchType.LAZY 적용 (N+1 문제 대비)
-
-**해결한 이슈**:
-1. **테스트 User 의존성** - 모든 테스트에 UserRepository Mock/실제 User 추가
-2. **Spring MVC 경로 충돌** - 구체적 경로를 `/{id}`보다 먼저 배치
-3. **DTO 파라미터 불일치** - `authorId` 필드 추가
-
-**문서**:
-- [PHASE3-1_HANDOVER.md](./docs/PHASE3-1_HANDOVER.md)
-- [JPA_LEARNING.md](./docs/JPA_LEARNING.md)
+**학습 자료**:
+- 📘 [JPA_LEARNING.md](../docs/JPA_LEARNING.md)
+- 📗 [PHASE3-1_HANDOVER.md](../docs/PHASE3-1_HANDOVER.md)
 
 ---
 
-#### 🔄 Phase 3-2: N+1 문제 해결 & 성능 최적화 (진행 중)
+#### ✅ 3-2. N+1 문제 해결 & Fetch Join (완료)
 
-**예정 학습 내용**:
-- N+1 문제 확인 및 재현
-- Fetch Join 구현
+**학습 기간**: 2026-01-04 (1일)  
+**목표**: N+1 문제 이해 및 성능 최적화
+
+**학습 내용**:
+- N+1 문제 발생 원인
+- Fetch Join 개념 및 구현
+- @Query with JOIN FETCH
+- Query Method 자동 JOIN
+- SQL 로깅 및 분석
+- 성능 측정
+
+**실습 과제**:
+- [x] N+1 문제 재현 테스트
+- [x] Fetch Join 메서드 구현
+- [x] 성능 비교 테스트
+- [x] SQL 로깅 설정
+
+**성과**:
+- ✅ 4개 성능 테스트 작성
+- ✅ 쿼리 98% 감소 (51 → 1)
+- ✅ Query Method JOIN 발견
+- ✅ SQL 분석 완료
+
+**성능 개선 결과**:
+```
+Before: 51 queries (N+1 문제)
+After:  1 query (Fetch Join)
+개선율: 98%
+```
+
+**해결 방법 비교**:
+| 방법 | 구현 난이도 | 효과 | 상태 |
+|------|------------|------|------|
+| Fetch Join | 중 | ⭐⭐⭐⭐⭐ | ✅ 완료 |
+| @EntityGraph | 하 | ⭐⭐⭐⭐ | 📅 예정 |
+| Batch Size | 하 | ⭐⭐⭐ | 📅 예정 |
+| Query Method | - | ⭐⭐⭐⭐ | ✅ 확인 |
+
+**학습 자료**:
+- 📙 [PHASE3-2_HANDOVER.md](../docs/PHASE3-2_HANDOVER.md)
+
+---
+
+#### 📋 3-3. @EntityGraph & Batch Size (예정)
+
+**예정일**: 2026-01-05  
+**목표**: 추가 성능 최적화 방법 학습
+
+**학습 내용**:
 - @EntityGraph 활용
 - Batch Size 설정
-- 성능 측정 및 비교
+- 페이징과의 조합
+- 성능 비교
+
+**실습 과제**:
+- [ ] @EntityGraph 구현
+- [ ] Batch Size 설정
+- [ ] 성능 측정 및 비교
+- [ ] 문서 작성
 
 ---
 
-#### 📋 Phase 3 다음 단계
+#### 📋 3-4. Comment 엔티티 (OneToMany) (예정)
 
-- [x] Phase 3-1: JPA 연관 관계 매핑
-- [ ] Phase 3-2: N+1 문제 해결
-- [ ] Phase 3-3: Comment & Category 엔티티
-- [ ] Phase 3-4: 페이징 & 정렬
-- [ ] Phase 3-5: Spring Security & JWT
-- [ ] Phase 3-6: Redis 캐싱
+**예정일**: 2026-01-06  
+**목표**: OneToMany 관계 및 양방향 매핑
 
----
+**학습 내용**:
+- @OneToMany 관계
+- 양방향 매핑
+- orphanRemoval
+- CascadeType
 
-## 📞 Contact
-
-- **GitHub**: [@hwan0050](https://github.com/hwan0050)
-- **Email**: akma0050@naver.com
-
----
-
-## 📝 License
-
-이 프로젝트는 개인 학습 목적으로 작성되었습니다.
+**실습 과제**:
+- [ ] Comment 엔티티 생성
+- [ ] Post-Comment 관계 설정
+- [ ] CRUD API 구현
+- [ ] 테스트 작성
 
 ---
 
-## 📝 업데이트 로그
+#### 📋 3-5. 페이징 & 정렬 (Pageable) (예정)
 
-### 2025-12-20 - Phase 2-5 Module 3 완료! 🎉
-- ✅ @SpringBootTest 통합 테스트 5개 작성
-- ✅ JaCoCo 커버리지 97% 달성
-- ✅ 전체 테스트 38개 100% 통과
-- ✅ PostService update/delete 로직 개선
-- ✅ 트러블슈팅 5가지 해결
-- 📊 총 500줄 테스트 코드, 800줄 문서
-- **Phase 2 전체 완료!** 🎊
+**예정일**: 2026-01-07  
+**목표**: 대용량 데이터 처리
 
-### 2025-12-06 - Phase 2-5 Module 1 & 2 완료! 🎉
-- ✅ Spring REST Docs 테스트 기반 문서 자동 생성
-- ✅ Swagger/OpenAPI 인터랙티브 문서 구축
-- ✅ 7개 API 완전 문서화 (REST Docs + Swagger)
-- ✅ Spring Boot 버전 호환성 문제 해결 (3.4.12 → 3.3.5)
-- ✅ Record 타입 DTO 패턴 확립
-- ✅ 32개 테스트 100% 통과 (25 + 7)
-- 📊 총 1,000줄 코드, 1,800줄 문서
+**학습 내용**:
+- Pageable 인터페이스
+- Page vs Slice
+- 정렬 전략
+- 커서 기반 페이징
 
-### 2025-12-01 - Phase 2-4 완료! 🎉
-- ✅ TDD & Spring Boot Testing 학습 완료
-- ✅ Repository, Service, Controller 계층별 테스트 작성
-- ✅ 총 25개 테스트 케이스 (100% 통과)
-- ✅ JPA Auditing 분리 및 GlobalExceptionHandler 추가
-- ✅ Mockito & MockMvc 마스터
-- 📊 총 800줄 테스트 코드, 1,400줄 문서
+**실습 과제**:
+- [ ] Pageable 구현
+- [ ] 정렬 기능 추가
+- [ ] 성능 테스트
+- [ ] API 문서화
 
-### 2025-11-27 - Phase 2-3 완료! 🎉
-- ✅ Docker 컨테이너화 학습 완료
-- ✅ Dockerfile 작성 (멀티 스테이지 빌드)
-- ✅ Docker Compose 구성 (Spring Boot + PostgreSQL)
-- ✅ 환경 변수 기반 설정 관리
-- ✅ 볼륨 및 네트워크 구성
-- 📊 총 120줄 코드, 2개 커밋, 5개 파일
-- ⚠️ Docker Desktop 환경 이슈로 실행 테스트는 추후 진행
+---
 
-### 2025-11-25 - Phase 2-2 완료! 🎉
-- ✅ Spring Boot 3.x + JPA 학습 완료
-- ✅ Blog REST API 구현 (7개 엔드포인트)
-- ✅ Entity, Repository, Service, Controller 계층 구현
-- ✅ JPA Auditing 및 쿼리 메서드 학습
-- 📊 총 350줄 코드, 3개 커밋, 8개 파일
+#### 📋 3-6. Spring Security & JWT (예정)
 
-### 2025-11-23 - Phase 2-1 완료! 🎉
-- ✅ Next.js 14 App Router 학습 완료
-- ✅ Server/Client Components 구분 학습
-- ✅ Dynamic Routes & Data Fetching 구현
-- ✅ Loading/Error Handling 패턴 학습
-- 📊 총 800줄 코드, 6개 커밋, 15개 파일
+**예정일**: 2026-01-08 ~  
+**목표**: 인증/인가 구현
 
-### 2024-11-22 - Phase 1 완료! 🎉
-- ✅ Git 워크플로우 학습 완료
-- ✅ TypeScript 기초 & 고급 개념 완료
-- ✅ React 기초 & 실전 연습 완료
-- ✅ 북마크 관리 앱 프로젝트 완성
-- 📊 총 4,000줄 코드, 4개 PR, 1개 완성 프로젝트
+**학습 내용**:
+- Spring Security 구조
+- JWT 인증
+- Role 기반 권한
+- 보안 필터 체인
 
-### 2024-11-18 - 프로젝트 시작
-- 🎯 Git Factory 저장소 생성
-- 📚 학습 로드맵 수립
+**실습 과제**:
+- [ ] Security 설정
+- [ ] JWT 발급/검증
+- [ ] 권한 체크
+- [ ] 보안 테스트
+
+---
+
+## 📊 Phase 3 학습 현황
+
+**전체 진행률**: 33% (2/6 완료)
+
+```
+✅ 3-1. JPA 연관 관계 매핑       [████████████] 100%
+✅ 3-2. N+1 문제 해결            [████████████] 100%
+⬜ 3-3. @EntityGraph & Batch     [            ]   0%
+⬜ 3-4. Comment 엔티티           [            ]   0%
+⬜ 3-5. 페이징 & 정렬            [            ]   0%
+⬜ 3-6. Spring Security          [            ]   0%
+```
+
+**완료된 학습**:
+- ✅ JPA 연관 관계 (@ManyToOne)
+- ✅ FetchType.LAZY 전략
+- ✅ N+1 문제 이해 및 해결
+- ✅ Fetch Join 구현
+- ✅ Query Method 자동 JOIN
+- ✅ SQL 로깅 및 분석
+
+**학습 중**:
+- 🔄 성능 최적화 전략
+
+**다음 학습**:
+- 📅 @EntityGraph
+- 📅 Batch Size
+- 📅 OneToMany 관계
+
+---
+
+## 📈 학습 통계
+
+### Phase 3 누적 현황
+
+**코드**:
+- Entity/DTO: ~600 lines
+- 테스트: ~580 lines
+- 총 코드: ~1,180 lines
+
+**테스트**:
+- 총 테스트: 57개
+- 통과율: 100% ✅
+- 커버리지: 유지
+
+**성능 개선**:
+- N+1 쿼리: 98% 감소
+- 51 queries → 1 query
+
+**문서**:
+- JPA_LEARNING.md: ~1,000 lines
+- PHASE3-1_HANDOVER.md: ~800 lines
+- PHASE3-2_HANDOVER.md: ~1,200 lines
+- 총 문서: ~3,000 lines
+
+**Pull Requests**:
+- Phase 3-1: #1 (Merged ✅)
+- Phase 3-2: #2 (Merged ✅)
+
+---
+
+## 🎯 학습 원칙
+
+### 1. 실습 우선
+- 이론 30%, 실습 70%
+- 모든 개념은 코드로 구현
+- 동작하는 프로젝트 완성
+
+### 2. 테스트 주도
+- 모든 기능에 테스트 작성
+- TDD 사이클 준수
+- 커버리지 90% 이상 유지
+
+### 3. 문서화 필수
+- 학습 노트 작성
+- 핸드오버 문서 작성
+- README 업데이트
+
+### 4. Git Workflow
+- Feature 브랜치 사용
+- Conventional Commits
+- Pull Request & Code Review
+
+---
+
+## 📚 추천 학습 자료
+
+### Phase 3 관련
+
+**JPA & Hibernate**:
+- 📘 자바 ORM 표준 JPA 프로그래밍 (김영한)
+- 🌐 [Hibernate Documentation](https://hibernate.org/orm/documentation/)
+- 🎥 인프런 - JPA 활용 시리즈
+
+**성능 최적화**:
+- 📗 [Vlad Mihalcea - N+1 Query Problem](https://vladmihalcea.com/n-plus-1-query-problem/)
+- 📙 High-Performance Java Persistence
+- 🌐 [Baeldung - JPA Performance](https://www.baeldung.com/jpa-performance)
+
+**Spring Security**:
+- 📕 스프링 시큐리티 인 액션
+- 🌐 [Spring Security Reference](https://docs.spring.io/spring-security/reference/)
+- 🎥 JWT 인증/인가 실습
+
+---
+
+## 🔜 다음 Phase 미리보기
+
+### Phase 4: 프론트엔드 심화
+- Next.js App Router 심화
+- Server Actions
+- React Query
+- Zustand State Management
+
+### Phase 5: MSA 아키텍처
+- Spring Cloud
+- Service Discovery
+- API Gateway
+- Message Queue (Kafka)
+
+### Phase 6: DevOps & 배포
+- CI/CD (GitHub Actions)
+- AWS 배포
+- Monitoring (Prometheus, Grafana)
+- 로깅 전략
+
+---
+
+## 📝 학습 체크리스트
+
+### Phase 3-2 완료 항목 ✅
+
+- [x] N+1 문제 개념 이해
+- [x] Fetch Join 구현
+- [x] 성능 테스트 작성
+- [x] SQL 로깅 설정
+- [x] 성능 비교 및 분석
+- [x] 문서 작성 완료
+- [x] Pull Request 생성
+- [x] README 업데이트
+
+### Phase 3-3 준비 사항
+
+- [ ] @EntityGraph 개념 학습
+- [ ] Batch Size 문서 읽기
+- [ ] 예제 코드 분석
+- [ ] 학습 계획 수립
+
+---
+
+## 💡 학습 팁
+
+### 효과적인 학습 방법
+
+1. **개념 → 구현 → 테스트 → 문서**
+    - 개념을 먼저 이해하고
+    - 직접 코드로 구현하고
+    - 테스트로 검증하고
+    - 문서로 정리
+
+2. **문제 해결 중심**
+    - "왜 이 문제가 발생했나?"
+    - "어떻게 해결할 수 있나?"
+    - "다른 방법은 없나?"
+
+3. **성능 측정 습관**
+    - 최적화 전/후 비교
+    - 수치로 증명
+    - 트레이드오프 고려
+
+4. **지속적인 리팩토링**
+    - 코드 품질 개선
+    - 테스트 유지보수
+    - 문서 업데이트
+
+---
+
+## 🎓 배운 점 정리
+
+### Phase 3-1 핵심 교훈
+1. **연관 관계는 신중하게**
+    - LAZY Loading 기본
+    - 양방향은 필요시만
+    - 순환 참조 주의
+
+2. **Query Methods 네이밍**
+    - `_` 로 엔티티 탐색
+    - Spring Data JPA 자동 생성
+    - 명확한 메서드명
+
+3. **테스트 리팩토링의 중요성**
+    - 엔티티 변경 시 전체 영향
+    - Mock 데이터 일관성
+    - 테스트 격리
+
+### Phase 3-2 핵심 교훈
+1. **N+1 문제는 치명적**
+    - LAZY Loading의 함정
+    - 네트워크 왕복 비용
+    - 실제 환경에서 더 심각
+
+2. **Fetch Join이 최선**
+    - 한 번의 쿼리로 해결
+    - JPQL로 명시적 제어
+    - 가장 효과적인 방법
+
+3. **성능 측정이 핵심**
+    - 추측보다 측정
+    - SQL 로그 분석
+    - 쿼리 횟수 확인
+
+4. **Query Method도 강력**
+    - 자동 JOIN 생성
+    - 네이밍 규칙만 따르면
+    - 추가 코드 불필요
+
+---
+
+## 📅 학습 일정 관리
+
+### 주간 목표 (2026-01-06 ~ 2026-01-10)
+- [ ] Phase 3-3 완료
+- [ ] Phase 3-4 시작
+- [ ] Comment API 구현
+
+### 월간 목표 (2026-01)
+- [ ] Phase 3 전체 완료
+- [ ] 60개 이상 테스트
+- [ ] Security 기초 구현
 
 ---
 
 <p align="center">
-  Made with ❤️ for Learning
+  <strong>꾸준함이 답이다 🔥</strong>
 </p>
