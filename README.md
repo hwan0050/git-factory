@@ -35,143 +35,91 @@ Git Factory는 단순한 코드 저장소가 아닌, **체계적인 학습 여�
 ## 🗺️ 학습 로드맵
 
 ### ✅ Phase 1: 기초 다지기 (완료!)
-
-**학습 기간**: 2024-11-18 ~ 2024-11-22 (5일)  
-**총 학습 시간**: 약 15시간  
-**완성 코드**: ~4,000줄  
-**완료 PR**: 4개
-
-#### 완료된 모듈
-- ✅ **Git 워크플로우 마스터**
-- ✅ **TypeScript 완벽 정복**
-- ✅ **React 핵심 개념**
-- ✅ **통합 실전 프로젝트** (북마크 관리 앱)
-
----
-
 ### ✅ Phase 2: 중급 개발 (완료!)
-
-**시작일**: 2025-11-23  
-**완료일**: 2025-12-20
-
-#### 완료된 모듈
-- ✅ Phase 2-1: Next.js 14 App Router
-- ✅ Phase 2-2: Spring Boot 3.x + JPA
-- ✅ Phase 2-3: Docker & Containerization
-- ✅ Phase 2-4: TDD & Spring Boot Testing
-- ✅ Phase 2-5: API Documentation & Integration Testing
-
-**최종 성과**:
-- 테스트: 38개 (100% 통과)
-- 코드 커버리지: 97%
-- 작성 문서: ~7,000 lines
-
----
 
 ### 🚀 Phase 3: 고급 JPA & 성능 최적화 (진행 중)
 
 **시작일**: 2026-01-03  
-**현재 진도**: Phase 3-2 완료 ✅
+**현재 진도**: Phase 3-3 완료 ✅
 
 ---
 
 #### ✅ Phase 3-1: JPA 연관 관계 매핑 (완료!)
 
 **학습 기간**: 2026-01-03 (1일)  
-**학습 시간**: 약 4-5시간  
 **완료 커밋**: 17개
-
-**학습 내용**:
-- JPA 연관 관계 매핑 (@ManyToOne)
-- User 엔티티 설계 (UserRole Enum)
-- Post-User 연관 관계 구현
-- FetchType.LAZY 지연 로딩 전략
-- Query Methods 네이밍 규칙
 
 **주요 성과**:
 - User-Post ManyToOne 관계 구현
 - 53개 테스트 100% 통과 ✅
-- Spring MVC 경로 충돌 해결
-- FetchType.LAZY 적용 (N+1 문제 대비)
-
-**ERD**:
-```
-┌─────────────────┐         ┌─────────────────┐
-│     users       │         │     posts       │
-├─────────────────┤         ├─────────────────┤
-│ id (PK)         │◄────────│ id (PK)         │
-│ username (UQ)   │    1    │ user_id (FK)    │ N
-│ email (UQ)      │         │ title           │
-│ password        │         │ content         │
-│ role (ENUM)     │         │ created_at      │
-│ created_at      │         │ updated_at      │
-│ updated_at      │         └─────────────────┘
-└─────────────────┘
-```
-
-**문서**:
-- [PHASE3-1_HANDOVER.md](./docs/PHASE3-1_HANDOVER.md)
-- [JPA_LEARNING.md](./docs/JPA_LEARNING.md)
+- FetchType.LAZY 적용
 
 ---
 
 #### ✅ Phase 3-2: N+1 문제 해결 & Fetch Join (완료!)
 
 **학습 기간**: 2026-01-04 (1일)  
-**학습 시간**: 약 3-4시간  
-**완성 코드**: ~180줄 (테스트 코드)  
 **완료 커밋**: 3개
-
-**학습 내용**:
-- N+1 문제 개념 및 발생 원인
-- Fetch Join을 통한 N+1 문제 해결
-- @Query with JOIN FETCH
-- Query Method 자동 JOIN 발견
-- SQL 로깅 설정 및 쿼리 분석
-- 성능 비교 및 측정
-
-**완성 프로젝트**: `blog-api` (성능 최적화)
-- N1ProblemTest 4개 테스트 작성
-- findAllWithAuthor() Fetch Join 메서드
-- findByIdWithAuthor() Fetch Join 메서드
-- SQL 로깅 설정 (hibernate.use_sql_comments)
-- 성능 비교 테스트 (51 queries → 1 query)
-
-**테스트 구조**:
-```
-src/test/java/com/gitfactory/blogapi/
-└── performance/
-    └── N1ProblemTest.java       (4개 테스트) ✅
-
-테스트 시나리오:
-1. N+1 문제 재현 - findAll() (51 queries)
-2. Query Method 자동 JOIN 확인
-3. Fetch Join 해결 - findAllWithAuthor() (1 query)
-4. 성능 비교 (findAll vs findAllWithAuthor)
-```
 
 **성능 개선 결과**:
 ```
-Before (N+1):     51 queries (1 + 50)
-After (Fetch):    1 query
-쿼리 감소율:      98% (51 → 1)
+Before: 51 queries (N+1 문제)
+After:  1 query (Fetch Join)
+개선율: 98% 🚀
 ```
 
-**주요 성과**:
-- N+1 문제 재현 및 확인
-- Fetch Join 구현 (JPQL @Query)
-- Query Method 자동 JOIN 발견
-- SQL 로깅으로 쿼리 분석
-- 성능 측정 및 비교
+**문서**:
+- [PHASE3-2_HANDOVER.md](./docs/PHASE3-2_HANDOVER.md)
 
-**해결 방법 비교**:
-1. **Fetch Join** (구현 완료) - 가장 효과적
-2. **@EntityGraph** (학습 예정) - 간결한 코드
-3. **Batch Size** (학습 예정) - 글로벌 설정
-4. **Query Method** (확인 완료) - 자동 JOIN
+---
+
+#### ✅ Phase 3-3: @EntityGraph & Batch Size (완료!)
+
+**학습 기간**: 2026-01-18 (1일)  
+**학습 시간**: 약 3시간  
+**완성 코드**: ~265줄  
+**완료 커밋**: 2개
+
+**학습 내용**:
+- @EntityGraph를 사용한 N+1 해결
+- Batch Size 글로벌 설정
+- 3가지 방법 성능 비교
+- 실전 사용 가이드 작성
+
+**완성 프로젝트**: `blog-api` (성능 최적화)
+- @EntityGraph 메서드 2개 추가
+- Batch Size 100 설정
+- PerformanceComparisonTest 6개 테스트
+
+**성능 비교 결과**:
+```
+📊 성능 순위:
+   1위: @EntityGraph     - 10ms  ⭐ (가장 빠름!)
+   2위: Fetch Join       - 13ms
+   3위: Batch Size       - 15ms (2 queries)
+```
+
+**3가지 방법 비교**:
+| 방법 | 쿼리 횟수 | 성능 | 추천도 |
+|------|-----------|------|--------|
+| @EntityGraph | 1번 | 10ms ⭐ | ⭐⭐⭐⭐⭐ |
+| Fetch Join | 1번 | 13ms | ⭐⭐⭐⭐ |
+| Batch Size | 2번 | 15ms | ⭐⭐⭐ |
+
+**주요 성과**:
+- 3가지 N+1 해결 방법 완성
+- @EntityGraph가 가장 효율적 확인
+- 상황별 사용 가이드 작성
+- 6개 테스트 100% 통과
+
+**실전 가이드**:
+1. **일반적인 경우** → @EntityGraph (간결, 빠름)
+2. **복잡한 쿼리** → Fetch Join (명시적 제어)
+3. **레거시 개선** → Batch Size (설정만)
+4. **페이징 필요** → @EntityGraph (제약 없음)
 
 **문서**:
-- [PHASE3-2_HANDOVER.md](./docs/PHASE3-2_HANDOVER.md) (~1,200 lines)
+- [PHASE3-3_HANDOVER.md](./docs/PHASE3-3_HANDOVER.md) (~1,500 lines)
 
 ---
 
@@ -179,7 +127,7 @@ After (Fetch):    1 query
 
 - [x] Phase 3-1: JPA 연관 관계 매핑
 - [x] Phase 3-2: N+1 문제 해결 & Fetch Join
-- [ ] Phase 3-3: @EntityGraph & Batch Size
+- [x] Phase 3-3: @EntityGraph & Batch Size
 - [ ] Phase 3-4: Comment 엔티티 (OneToMany)
 - [ ] Phase 3-5: 페이징 & 정렬 (Pageable)
 - [ ] Phase 3-6: Spring Security & JWT
@@ -190,66 +138,46 @@ After (Fetch):    1 query
 
 ```
 git-factory/
-├── docs/                                    # 📚 모든 학습 문서 통합
-│   ├── SPRING_BOOT_LEARNING.md
-│   ├── DOCKER_LEARNING.md
-│   ├── TESTING_LEARNING.md
-│   ├── SWAGGER_LEARNING.md
-│   ├── JPA_LEARNING.md                     (Phase 3-1)
-│   ├── PHASE3-1_HANDOVER.md                (Phase 3-1)
-│   └── PHASE3-2_HANDOVER.md                (Phase 3-2) ✨
+├── docs/
+│   ├── JPA_LEARNING.md
+│   ├── PHASE3-1_HANDOVER.md
+│   ├── PHASE3-2_HANDOVER.md
+│   └── PHASE3-3_HANDOVER.md              ✨ (Phase 3-3)
 │
-├── practices/
-│   └── java/spring-boot/blog-api/
-│       ├── src/
-│       │   ├── main/
-│       │   │   ├── java/com/gitfactory/blogapi/
-│       │   │   │   ├── repository/
-│       │   │   │   │   ├── PostRepository.java        ✨ (Fetch Join 추가)
-│       │   │   │   │   └── UserRepository.java
-│       │   │   │   └── ...
-│       │   │   └── resources/
-│       │   │       └── application.properties         ✨ (SQL 로깅)
-│       │   │
-│       │   └── test/
-│       │       └── java/com/gitfactory/blogapi/
-│       │           ├── repository/         (7개)
-│       │           ├── service/            (10개)
-│       │           ├── controller/         (8개)
-│       │           ├── integration/        (5개)
-│       │           └── performance/
-│       │               └── N1ProblemTest.java         ✨ (4개)
-│       │
-│       └── build.gradle
-│
-└── README.md
+└── practices/java/spring-boot/blog-api/
+    ├── src/
+    │   ├── main/
+    │   │   ├── java/.../repository/
+    │   │   │   └── PostRepository.java   ✨ (@EntityGraph 추가)
+    │   │   └── resources/
+    │   │       └── application.properties ✨ (Batch Size)
+    │   │
+    │   └── test/
+    │       └── java/.../performance/
+    │           ├── N1ProblemTest.java           (4개)
+    │           └── PerformanceComparisonTest.java ✨ (6개)
 ```
 
 ---
 
 ## 🧪 테스트 실행 방법
 
-### blog-api 테스트
-
 ```bash
+cd practices/java/spring-boot/blog-api
+
 # 전체 테스트 실행
 ./gradlew clean test
 
 # 성능 테스트만 실행
-./gradlew test --tests "com.gitfactory.blogapi.performance.N1ProblemTest"
+./gradlew test --tests "com.gitfactory.blogapi.performance.*"
 ```
 
 **예상 결과**:
 ```
-BUILD SUCCESSFUL in 20s
-✅ N1ProblemTest:              4/4   (100%) ✨
-✅ BlogApiIntegrationTest:     5/5   (100%)
-✅ PostRepositoryTest:         7/7   (100%)
-✅ PostServiceTest:            10/10 (100%)
-✅ PostControllerTest:         8/8   (100%)
-✅ PostControllerRestDocsTest: 7/7   (100%)
+✅ N1ProblemTest:                   4/4   (100%)
+✅ PerformanceComparisonTest:       6/6   (100%)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ 총합:                       41/41 (100%) 🎉
+✅ Performance 패키지:              10/10 (100%)
 ```
 
 ---
@@ -258,40 +186,9 @@ BUILD SUCCESSFUL in 20s
 
 ### Phase 3: 고급 JPA & 성능 최적화
 - [JPA_LEARNING.md](./docs/JPA_LEARNING.md) - 1,000 lines
-    - JPA 연관 관계 매핑
-    - FetchType.LAZY vs EAGER
-    - Query Methods 네이밍 규칙
 - [PHASE3-1_HANDOVER.md](./docs/PHASE3-1_HANDOVER.md) - 800 lines
-    - User-Post 관계 구현
-    - 53개 테스트 리팩토링
 - [PHASE3-2_HANDOVER.md](./docs/PHASE3-2_HANDOVER.md) - 1,200 lines
-    - N+1 문제 개념 및 해결
-    - Fetch Join 구현
-    - 성능 측정 및 비교
-
----
-
-## 🎯 Git Workflow
-
-### 커밋 메시지 컨벤션
-
-```bash
-# Conventional Commits 형식
-<type>(<scope>): <subject>
-
-# 예시
-perf(repository): Implement Fetch Join to solve N+1 problem
-test(performance): Add N1ProblemTest with 4 test cases
-docs(phase3-2): Add N+1 problem solution handover document
-```
-
-**Type**:
-- `feat`: 새로운 기능
-- `fix`: 버그 수정
-- `docs`: 문서 변경
-- `test`: 테스트 추가/수정
-- `perf`: 성능 개선
-- `refactor`: 리팩토링
+- [PHASE3-3_HANDOVER.md](./docs/PHASE3-3_HANDOVER.md) - 1,500 lines ✨
 
 ---
 
@@ -300,25 +197,25 @@ docs(phase3-2): Add N+1 problem solution handover document
 ### ✅ Phase 1 (완료)
 - **기간**: 2024-11-18 ~ 2024-11-22 (5일)
 - **작성 코드**: ~4,000 lines
-- **PR**: 4개
 
 ### ✅ Phase 2 (완료!)
 - **기간**: 2025-11-23 ~ 2025-12-20
-- **테스트 케이스**: 38개 (100% 통과)
+- **테스트**: 38개 (100% 통과)
 - **코드 커버리지**: 97%
-- **PR**: 17개
 
 ### 🔄 Phase 3 (진행 중)
 - **시작일**: 2026-01-03
-- **현재 진도**: Phase 3-2 완료 ✅
-- **완료 모듈**: 3-1, 3-2
+- **현재 진도**: Phase 3-3 완료 ✅
+- **완료 모듈**: 3-1, 3-2, 3-3
 - **작성 코드**:
-    - Entity/DTO 수정: ~600 lines
-    - 테스트 코드: ~580 lines (57개)
-- **테스트 케이스**: 57개 (100% 통과 ✅)
-- **성능 개선**: N+1 쿼리 98% 감소 (51 → 1)
-- **작성 문서**: ~3,000 lines (3개 문서)
-- **PR**: 2개
+    - Entity/DTO: ~600 lines
+    - 테스트: ~845 lines (63개)
+- **테스트 케이스**: 63개 (100% 통과 ✅)
+- **성능 개선**:
+    - N+1 쿼리: 98% 감소 (51 → 1)
+    - 3가지 해결 방법 완성
+- **작성 문서**: ~4,500 lines (4개 문서)
+- **PR**: 3개 (모두 Merged)
 
 ---
 
@@ -327,34 +224,36 @@ docs(phase3-2): Add N+1 problem solution handover document
 ### Phase 3 진행 중
 - [x] Phase 3-1: JPA 연관 관계 매핑
 - [x] Phase 3-2: N+1 문제 해결 & Fetch Join
-- [ ] Phase 3-3: @EntityGraph & Batch Size
+- [x] Phase 3-3: @EntityGraph & Batch Size
 - [ ] Phase 3-4: Comment 엔티티 (OneToMany)
 - [ ] Phase 3-5: 페이징 & 정렬
 - [ ] Phase 3-6: Spring Security & JWT
+
+**진행률**: 50% (3/6 완료) 🎉
 
 ---
 
 ## 📝 업데이트 로그
 
+### 2026-01-18 - Phase 3-3 완료! 🎉
+- ✅ @EntityGraph 구현 (2개 메서드)
+- ✅ Batch Size 설정 (100)
+- ✅ 3가지 방법 성능 비교 완료
+- ✅ 성능 테스트 6개 작성 (모두 통과)
+- ✅ @EntityGraph 10ms로 가장 빠름!
+- ✅ 상황별 사용 가이드 작성
+- 📊 총 265줄 코드, 1,500줄 문서
+- **Phase 3 절반 완료!** (3/6) 🎊
+
 ### 2026-01-04 - Phase 3-2 완료! 🎉
-- ✅ N+1 문제 개념 학습 및 재현
-- ✅ Fetch Join 구현 (JOIN FETCH)
-- ✅ 성능 테스트 4개 작성 (모두 통과)
-- ✅ 쿼리 최적화 (51 queries → 1 query, 98% 감소)
-- ✅ SQL 로깅 설정 및 분석
-- ✅ Query Method 자동 JOIN 발견
-- 📊 총 180줄 테스트 코드, 1,200줄 문서
-- **N+1 문제 완벽 해결!** 🚀
+- ✅ N+1 문제 해결 (Fetch Join)
+- ✅ 성능 98% 개선 (51 → 1 query)
+- 📊 총 180줄 코드, 1,200줄 문서
 
 ### 2026-01-03 - Phase 3-1 완료! 🎉
-- ✅ JPA 연관 관계 매핑 (@ManyToOne) 학습 완료
-- ✅ User 엔티티 신규 생성
-- ✅ 전체 테스트 코드 리팩토링 (53개 100% 통과)
+- ✅ JPA 연관 관계 매핑
+- ✅ 53개 테스트 리팩토링
 - 📊 총 600줄 코드, 1,800줄 문서
-
-### 2025-12-20 - Phase 2 완료! 🎊
-- ✅ 통합 테스트 & JaCoCo 커버리지 97% 달성
-- **Phase 2 전체 완료!**
 
 ---
 
@@ -362,12 +261,6 @@ docs(phase3-2): Add N+1 problem solution handover document
 
 - **GitHub**: [@hwan0050](https://github.com/hwan0050)
 - **Email**: akma0050@naver.com
-
----
-
-## 📝 License
-
-이 프로젝트는 개인 학습 목적으로 작성되었습니다.
 
 ---
 
